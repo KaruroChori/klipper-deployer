@@ -1,6 +1,5 @@
 {
   "install": {
-    "base": "${HOME}/klipper",
     "gcode-nfs": ""
   },
   "services": {

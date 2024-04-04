@@ -2,8 +2,9 @@ import { Static, Type as t } from "@sinclair/typebox"
 
 const w = t.Object({
     "install": t.Object({
-        base: t.String({ default: "${HOME}/klipper" }),
-        "gcode-nfs": t.Optional(t.String({ description: "If set, the gcode folder will include a remote subdir which is mounted to a remote location" }))
+        base: t.String({ default: `${process.env.HOME}/klipper-deployer` }),
+        "gcode-nfs": t.Optional(t.String({ description: "If set, the gcode folder will include a remote subdir which is mounted to a remote location" })),
+        user: t.String({ default: process.env.USER ?? 'user', description: "The user to use to run those services" })
     }, { default: {}, additionalProperties: false }),
     "services": t.Object({
         "klipper": t.Optional(t.Object({

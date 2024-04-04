@@ -5,7 +5,7 @@ import { schema } from "@schemas/main.schema.ts"
 import { $ } from "bun";
 import { default as vv } from "@config/main.json"
 
-await $`cp -r ../config/ ../config.backup-${Date.now()}`
+await $`cp -r ./config/ ./config.backup-${Date.now()}`
 
 let value = vv
 Value.Default(schema, value)
