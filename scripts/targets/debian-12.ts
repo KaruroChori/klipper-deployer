@@ -45,49 +45,50 @@ export const install_packages = {
         console.log("Updating python virtual environment...")
 
         // Create virtualenv if it doesn't already exist
-        await $`[ ! -d ${config.install.base}/klipper_env ] && virtualenv -p python3 ${config.install.base}/klipper_env`
+        await $`[ ! -d ${config.install.base}/klippy_env ] && virtualenv -p python3 ${config.install.base}/klippy_env`
         //Install / update dependencies
-        await $`${config.install.base}/klipper_env/bin/pip install -r ${config.install.base}/repos/klipper/scripts/klippy-requirements.txt`
+        await $`${config.install.base}/klippy_env/bin/pip install -r ${config.install.base}/repos/klipper/scripts/klippy-requirements.txt`
     },
-    moonraker: async (opts: schema) => {
+    moonraker: async (config: schema) => {
+        //TODO: Basically an alternative implementation for ./install-moonraker.sh split across make_intance and here.
+        //await $`cd ${config.install.base}/repos/moonraker/scripts && ./install-moonraker.sh`
+    },
+    fluidd: async (config: schema) => {
         //TODO
     },
-    fluidd: async (opts: schema) => {
-        //TODO
-    },
-    mainsail: async (opts: schema) => {
+    mainsail: async (config: schema) => {
         //TODO
     }
 }
 
 //Code which creates the specific instance running
 export const make_instance = {
-    klipper: async (opts: schema) => {
+    klipper: async (config: schema) => {
         //TODO
     },
-    moonraker: async (opts: schema) => {
+    moonraker: async (config: schema) => {
         //TODO
     },
-    fluidd: async (opts: schema) => {
+    fluidd: async (config: schema) => {
         //TODO
     },
-    mainsail: async (opts: schema) => {
+    mainsail: async (config: schema) => {
         //TODO
     }
 }
 
 //Code which creates the specific instance running
 export const delete_instance = {
-    klipper: async (opts: schema) => {
+    klipper: async (config: schema) => {
         //TODO
     },
-    moonraker: async (opts: schema) => {
+    moonraker: async (config: schema) => {
         //TODO
     },
-    fluidd: async (opts: schema) => {
+    fluidd: async (config: schema) => {
         //TODO
     },
-    mainsail: async (opts: schema) => {
+    mainsail: async (config: schema) => {
         //TODO
     }
 }
