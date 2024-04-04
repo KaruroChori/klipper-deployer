@@ -23,3 +23,12 @@ export async function get_config() {
     return config
 }
 
+
+export async function get_env() {
+    const distroInfo = await Bun.file('/etc/os-releases').text()
+    //TODO parsing
+
+    const install_packages = (await import('./targets/debian-12')).install_packages
+
+    return install_packages
+}

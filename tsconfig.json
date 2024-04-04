@@ -20,7 +20,7 @@
     "types": ["bun-types"],
     "paths": {
       "@schemas/*": ["./schemas/*"],
-      "@scripts/*": ["./bin/scripts/*"],
+      "@scripts/*": ["./scripts/*"],
       "@templates/*": ["./templates/*"],
       "@config/*": ["./config/*"]
     }

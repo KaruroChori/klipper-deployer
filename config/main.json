@@ -1,37 +1,39 @@
 {
-  "install": {
-    "base": "/home/migration/klipper-deployer",
-    "user": "migration",
-    "systemd": "/etc/systemd/system"
-  },
-  "services": {
-    "klipper": {
-      "enabled": true,
-      "arch": ["runtime"],
-      "repo": "https://github.com/Klipper3d/klipper",
-      "branch": "master"
+    "install": {
+        "base": "/home/migration/klipper-deployer",
+        "user": "migration",
+        "systemd": "/etc/systemd/system"
     },
-    "moonraker": {
-      "enabled": true,
-      "repo": "https://github.com/Arksine/moonraker",
-      "branch": "master"
+    "services": {
+        "klipper": {
+            "enabled": true,
+            "arch": [
+                "runtime"
+            ],
+            "repo": "https://github.com/Klipper3d/klipper",
+            "branch": "master"
+        },
+        "moonraker": {
+            "enabled": false,
+            "repo": "https://github.com/Arksine/moonraker",
+            "branch": "master"
+        },
+        "fluidd": {
+            "enabled": false,
+            "repo": "https://github.com/fluidd-core/fluidd",
+            "tag": "v1.29.1"
+        },
+        "mainsail": {
+            "enabled": false,
+            "repo": "https://github.com/mainsail-crew/mainsail",
+            "tag": "v2.10.0"
+        }
     },
-    "fluidd": {
-      "enabled": true,
-      "repo": "https://github.com/fluidd-core/fluidd",
-      "tag": "v1.29.1"
-    },
-    "mainsail": {
-      "enabled": true,
-      "repo": "https://github.com/mainsail-crew/mainsail",
-      "tag": "v2.10.0"
+    "instances": {
+        "0": {
+            "moonraker": {
+                "port": 7125
+            }
+        }
     }
-  },
-  "instances": {
-    "0": {
-      "moonraker": {
-        "port": 7125
-      }
-    }
-  }
 }

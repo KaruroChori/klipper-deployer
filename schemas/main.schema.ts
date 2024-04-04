@@ -5,7 +5,11 @@ const w = t.Object({
         base: t.String({ default: `${process.env.HOME}/klipper-deployer` }),
         "gcode-nfs": t.Optional(t.String({ description: "If set, the gcode folder will include a remote subdir which is mounted to a remote location" })),
         user: t.String({ default: process.env.USER ?? 'user', description: "The user to use to run those services" }),
-        systemd: t.String({ default: '/etc/systemd/system', description: "Folder for the system deamon" })
+        systemd: t.String({ default: '/etc/systemd/system', description: "Folder for the system deamon" }),
+        toolchains: t.Optional(t.Object({
+            avr: t.Optional(t.String({ description: 'Path for an external avr toolchain' })),
+            arm32: t.Optional(t.String({ description: 'Path for an external arm32 toolchain' }))
+        }))
     }, { default: {}, additionalProperties: false }),
     "services": t.Object({
         "klipper": t.Optional(t.Object({
@@ -13,9 +17,10 @@ const w = t.Object({
             arch: t.Array(t.Union(
                 [
                     t.Literal('runtime', { description: "Only the dependencies needed to have the runtime working are installed" }),
-                    t.Literal('all', { description: "All dependencies are installed, usually needed if you want to build on the same system" })
+                    t.Literal('all', { description: "All dependencies are installed, usually needed if you want to build on the same system" }),
+                    t.Literal('avr', { description: "AVR processors support" }),
+                    t.Literal('arm32', { description: "ARM32 processors support" })
                 ],
-
             ), { default: ["runtime"] }),
             repo: t.String({ default: 'https://github.com/Klipper3d/klipper' }),
             branch: t.String({ default: 'master', description: 'The branch to use to copy from' }),

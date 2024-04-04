@@ -7,10 +7,12 @@
   "packageManager": "bun@1.1.0",
   "scripts": {
     "cleanup": "rm -rf *.backup*",
-    "gen-config": "./bin/scripts/gen-config.ts",
-    "pull-all": "./bin/scripts/pull-all.ts",
-    "install-all": "",
-    "remove-all": ""
+    "gen-config": "./scripts/gen-config.ts",
+    "clone-all": "./scripts/clone-all.ts",
+    "pull-all": "./scripts/pull-all.ts",
+    "install-all": "./scripts/install-all.ts",
+    "remove-all": "./scripts/remove-all.ts",
+    "env-shell": "./scripts/env-shell.ts"
   },
   "dependencies": {
     "@sinclair/typebox": "^0.32.20"
