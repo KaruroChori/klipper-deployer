@@ -1,0 +1,26 @@
+{
+  "install": {
+    "base": "${HOME}/klipper",
+    "gcode-nfs": ""
+  },
+  "services": {
+    "klipper": {
+      "arch": ["runtime"],
+      "enabled": true,
+      "repo": "",
+      "branch": ""
+    },
+    "moonraker": {
+      "enabled": true,
+      "repo": "",
+      "branch": ""
+    },
+    "fluidd": { "enabled": true, "repo": "" },
+    "mainsail": { "enabled": true, "repo": "" }
+  },
+  "instances": {
+    "name-1": {
+      "moonraker": { "port": 7433 }
+    }
+  }
+}

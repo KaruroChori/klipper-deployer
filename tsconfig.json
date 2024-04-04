@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "lib": ["ESNext"],
+    "module": "esnext",
+    "target": "esnext",
+    "moduleResolution": "bundler",
+    "moduleDetection": "force",
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "strict": true,
+    "jsx": "react",
+    "jsxFactory": "Html.createElement",
+    "jsxFragmentFactory": "Html.Fragment",
+
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true,
+    "allowJs": true,
+
+    "types": ["bun-types"],
+    "paths": {
+      "@schemas/*": ["./schemas/*"],
+      "@scripts/*": ["./bin/scripts/*"],
+      "@templates/*": ["./templates/*"],
+      "@config/*": ["./config/*"]
+    }
+  }
+  //"files": ["./apps/global.d.ts"],
+  //"include": []
+}

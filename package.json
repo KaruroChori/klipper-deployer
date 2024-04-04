@@ -1,0 +1,17 @@
+{
+  "name": "klipper-manager",
+  "main": "./bin/main",
+  "license": "UNLICENSED",
+  "private": true,
+  "type": "module",
+  "packageManager": "bun@1.1.0",
+  "scripts": {
+    "cleanup": "rm -rf *.backup*",
+    "update-main": "",
+    "update-instances": "",
+    "remove-all": ""
+  },
+  "dependencies": {
+    "@sinclair/typebox": "^0.32.20"
+  }
+}
