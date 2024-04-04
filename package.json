@@ -8,9 +8,8 @@
   "scripts": {
     "cleanup": "rm -rf *.backup*",
     "gen-config": "./bin/scripts/gen-config.ts",
-    "pull": "./bin/scripts/pull.ts",
-    "update-main": "",
-    "update-instances": "",
+    "pull-all": "./bin/scripts/pull-all.ts",
+    "install-all": "",
     "remove-all": ""
   },
   "dependencies": {

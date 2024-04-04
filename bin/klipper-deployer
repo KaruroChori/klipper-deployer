@@ -1,0 +1,2 @@
+#!/bin/env bun
+//TODO: main entry point for sub-commands. To be added to PATH
