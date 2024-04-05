@@ -25,7 +25,7 @@ export async function get_config() {
 }
 
 
-export async function get_env() {
+export async function get_env(config: schema) {
     if (os.platform() !== 'linux') {
         console.error('This utility can only be run on linux')
         process.exit(1)
@@ -36,6 +36,15 @@ export async function get_env() {
     //TODO parsing
 
     const t = (await import('./targets/debian-12'))
+    const w = {
+        install_packages: t.install_packages(config),
+        uninstall_packages: t.uninstall_packages(config),
+        clean: t.clean(config),
+        clone: t.clone(config),
+        pull: t.pull(config),
+        make_instance: (i: string) => t.make_instance(config, i),
+        delete_instance: (i: string) => t.delete_instance(config, i),
+    }
 
-    return t
+    return w
 }

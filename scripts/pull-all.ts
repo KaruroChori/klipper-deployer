@@ -7,44 +7,31 @@ import { Value } from "@sinclair/typebox/value";
 import { get_config, get_env } from "./@utils";
 import os from 'node:os'
 
-const config = await get_config();
-
-if (os.platform() !== 'linux') {
-    console.error('This utility can only be run on linux')
-    process.exit(1)
-}
-
 try {
-    const distroInfo = await Bun.file('/etc/os-releases').text()
-    //TODO parsing
+    const config = await get_config();
+    const { install_packages, pull } = await get_env(config)
 
-    const { install_packages } = await get_env()
-
-    await install_packages.system(config);
+    await install_packages.system();
 
 
     if (config.services.klipper?.enabled === true) {
-        console.log('Pulling klipper')
-        await $`cd ${config.install.base}/repos/ &&  git pull`
-        await install_packages.klipper(config);
+        await pull.klipper()
+        await install_packages.klipper();
     }
 
     if (config.services.moonraker?.enabled === true) {
-        console.log('Pulling moonraker')
-        await $`cd ${config.install.base}/repos/ &&  git pull`
-        await install_packages.moonraker(config);
+        await pull.moonraker()
+        await install_packages.moonraker();
     }
 
     if (config.services.mainsail?.enabled === true) {
-        console.log('Cloning mainsail')
-        await $`cd ${config.install.base}/repos/mainsail && rm -rf ./* && wget ${config.services.mainsail.repo}/releases/download/${config.services.mainsail.tag}/mainsail.zip && unzip mainsail.zip && rm mainsail.zip`
-        await install_packages.mainsail(config);
+        await pull.mainsail()
+        await install_packages.mainsail();
     }
 
     if (config.services.fluidd?.enabled === true) {
-        console.log('Cloning fluidd')
-        await $`cd ${config.install.base}/repos/fluidd && rm -rf ./* &&  wget ${config.services.fluidd.repo}/releases/download/${config.services.fluidd.tag}/fluidd.zip && unzip fluidd.zip && rm fluidd.zip`
-        await install_packages.fluidd(config);
+        await pull.fluidd()
+        await install_packages.fluidd();
     }
 
     console.log("Images pulled and packages installed!")

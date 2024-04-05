@@ -11,30 +11,30 @@ program.command('init').description('Initialize a klipper environment in the cur
     (await import("../scripts/gen-config.ts"))
 })
 
-program.command('clone').description('Clone all repos according to the current configuration.').action(async () => {
+program.command('clone').description('Clone all repos according to the current configuration & install deps').action(async () => {
     //Perform the intial config file generation if not already there
     (await import("../scripts/clone-all.ts"))
 })
 
-program.command('pull').description('Pull updates for the current repos.').action(async () => {
+program.command('pull').description('Pull updates for the current repos & install deps').action(async () => {
     //Perform the intial config file generation if not already there
     (await import("../scripts/pull-all.ts"))
 })
 
 
-program.command('install').description('Install all dependencies and build environments for the services needed.').action(async () => {
+program.command('install').description('Apply the instances section of the config file.').action(async () => {
     //Perform the intial config file generation if not already there
     (await import("../scripts/install-all.ts"))
 })
 
-program.command('add').description('Add a new instance').action(async () => {
+program.command('new').description('Add a new instance').option('install', "Automatically spawn the new instance after configuration", false).action(async () => {
     //Perform the intial config file generation if not already there
     console.warn("TODO")
 })
 
 program.command('clean').description('Remove all instances').action(async () => {
     //Perform the intial config file generation if not already there
-    (await import("../scripts/remove-all.ts"))
+    (await import("../scripts/remove-instance.ts"))
 })
 
 program.command('shell').description('Open a shell to compile a klipper firmware').action(async () => {
@@ -42,7 +42,7 @@ program.command('shell').description('Open a shell to compile a klipper firmware
     (await import("../scripts/env-shell.ts"))
 })
 
-program.command('edit').description('Open an editor to change the config file').action(async () => {
+program.command('edit-config').description('Open an editor to change the config file').action(async () => {
     //Perform the intial config file generation if not already there
     console.warn("TODO")
 })
