@@ -1,4 +1,3 @@
-#!/bin/env bun
 import { $ } from "bun";
 import { schema } from "@schemas/main.schema.ts"
 
