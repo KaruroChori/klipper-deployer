@@ -3,8 +3,37 @@
 import { program } from "commander"
 import { version } from "../package.json"
 import chalk from "chalk"
+import { $ } from 'bun'
 
 program.name('klipper-deployer').description('CLI to deploy klipper and its ecosystem on your node.\nUse all for the quick option.').version(version)
+
+//////////////////////////////////////////////
+// Quick operations via complete presets
+//////////////////////////////////////////////
+
+program.command('presets').description('List all available presets.').action(async () => {
+    //Bun globs do not work well with absolute paths sadly.
+    const t = (await $`ls ${import.meta.dir}/../templates/profiles/`.quiet()).text().split('\n').filter(x => x !== "")
+
+    for (const file of t) {
+        console.log(file.split('.json')[0])
+    }
+})
+
+program.command('preset').argument('<name>').description('One enter operation using one of the default presets.').action(async (arg0) => {
+    try {
+        await $`mkdir -p ./config/`.quiet()
+        await $`cp -p ${import.meta.dir}/../templates/profiles/${arg0}.json ./config/`.quiet()
+        console.log(`Preset copied.`)
+    }
+    catch (e) {
+        console.error(`Cannot copy preset ${arg0}`)
+    }
+})
+
+//////////////////////////////////////////////
+// Normal workflow
+//////////////////////////////////////////////
 
 program.command('init').description('Initialize a klipper environment in the current folder.').action(async () => {
     //(await import("../scripts/gen-config.ts"))
@@ -51,20 +80,6 @@ program.command('stop').description('Stop all services').action(async () => {
     console.warn("TODO")
 })
 
-//////////////////////////////////////////////
-// Quick operations via complete presets
-//////////////////////////////////////////////
-
-program.command('presets').description('List all available presets.').action(() => {
-    console.log('Not implemented')
-})
-
-program.command('preset').argument('<name>').description('One enter operation using one of the default presets.').action(async () => {
-    //(await import("../scripts/gen-config.ts"));
-    //(await import("../scripts/clone-all.ts"));
-    //(await import("../scripts/install-all.ts"));
-    //console.warn("TODO")
-})
 
 //////////////////////////////////////////////
 // Convenience operations
