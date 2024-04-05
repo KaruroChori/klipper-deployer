@@ -7,7 +7,7 @@
         <mxCell id="hbsouDKqxY18hAI5hccB-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=-0.075;entryY=0.513;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="hbsouDKqxY18hAI5hccB-1" target="hbsouDKqxY18hAI5hccB-31">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="hbsouDKqxY18hAI5hccB-1" value="gen-config" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="hbsouDKqxY18hAI5hccB-1" value="config" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="-220" y="430" width="80" height="40" as="geometry" />
         </mxCell>
         <mxCell id="hbsouDKqxY18hAI5hccB-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="hbsouDKqxY18hAI5hccB-2" target="hbsouDKqxY18hAI5hccB-3">
@@ -78,7 +78,7 @@
         <mxCell id="hbsouDKqxY18hAI5hccB-36" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="hbsouDKqxY18hAI5hccB-25" target="hbsouDKqxY18hAI5hccB-31">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="hbsouDKqxY18hAI5hccB-25" value="cleanup" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="hbsouDKqxY18hAI5hccB-25" value="amend" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="810" y="560" width="80" height="40" as="geometry" />
         </mxCell>
         <mxCell id="hbsouDKqxY18hAI5hccB-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="hbsouDKqxY18hAI5hccB-31" target="hbsouDKqxY18hAI5hccB-6">
