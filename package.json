@@ -1,6 +1,6 @@
 {
   "name": "klipper-manager",
-  "main": "./bin/main",
+  "main": "./bin/klipper-deployer",
   "version": "0.1",
   "license": "UNLICENSED",
   "private": true,

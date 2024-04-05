@@ -2,8 +2,6 @@
 
 ## bin
 
-## config
-
 ## templates
 
 ## schemas
