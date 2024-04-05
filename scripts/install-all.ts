@@ -2,7 +2,6 @@
 
 
 import { $ } from "bun";
-import { default as vv } from "@config/main.json"
 import os from 'node:os'
 import { get_config, get_env } from "./@utils";
 

@@ -30,7 +30,8 @@ const w = t.Object({
             enabled: t.Boolean({ default: false }),
             repo: t.String({ default: 'https://github.com/Arksine/moonraker' }),
             branch: t.String({ default: 'master', description: 'The branch to use to copy from' }),
-            commit: t.Optional(t.String({ description: 'Alternative to branch, select the exact commit' }))
+            commit: t.Optional(t.String({ description: 'Alternative to branch, select the exact commit' })),
+            speedsup: t.Optional(t.Boolean({ default: true, description: 'Install additional packages' }))
         }, { default: {}, additionalProperties: false })),
         "fluidd": t.Optional(t.Object({
             enabled: t.Boolean({ default: false }),
