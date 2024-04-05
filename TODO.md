@@ -9,3 +9,7 @@
 - [x] Add basic documentation
 - [ ] Add full tutorial
 - [ ] Distribute as a NPM package
+
+## Path to beta 1
+
+- [ ] Add proper config files for the quick profiles
