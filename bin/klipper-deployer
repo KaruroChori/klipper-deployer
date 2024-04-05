@@ -36,28 +36,30 @@ program.command('preset').argument('<name>').description('One enter operation us
 //////////////////////////////////////////////
 
 program.command('init').description('Initialize a klipper environment in the current folder.').action(async () => {
-    //(await import("../scripts/gen-config.ts"))
+    (await import("../scripts/init.ts"))
 })
 
 program.command('commit').description('Confirm the current file being edited as source for all next steps.').action(async () => {
+    (await import("../scripts/commit.ts"))
+
 })
 
 
 program.command('clone').description('Clone all repos according to the current configuration').action(async () => {
-    //(await import("../scripts/clone-all.ts"))
+    (await import("../scripts/clone.ts"))
 })
 
 program.command('pull').description('Pull updates for the current repos').action(async () => {
-    //(await import("../scripts/pull-all.ts"))
+    (await import("../scripts/pull.ts"))
 })
 
 
 program.command('install').description('Install deps for all services needed and prepare global ones.').action(async () => {
-    //(await import("../scripts/install-deps.ts"))
+    (await import("../scripts/install.ts"))
 })
 
 program.command('uninstall').description('Remove venvs for all services and remove global ones.').action(async () => {
-    //(await import("../scripts/uninstall-deps.ts"))
+    (await import("../scripts/uninstall.ts"))
 })
 
 
@@ -71,12 +73,10 @@ program.command('apply').description('Install all instances for which a folder i
 //////////////////////////////////////////////
 
 program.command('start').description('Start all services').action(async () => {
-    //Perform the intial config file generation if not already there
     console.warn("TODO")
 })
 
 program.command('stop').description('Stop all services').action(async () => {
-    //Perform the intial config file generation if not already there
     console.warn("TODO")
 })
 
@@ -86,22 +86,19 @@ program.command('stop').description('Stop all services').action(async () => {
 //////////////////////////////////////////////
 
 program.command('klipper-shell').description('Open a shell to compile a klipper firmware with the correct env for toolchains.').action(async () => {
-    //Perform the intial config file generation if not already there
-    (await import("../scripts/env-shell.ts"))
+    //Old implementation: (await import("../scripts/to-port-over/env-shell.ts"))
+    console.warn("TODO")
 })
 
 program.command('edit-config').description('Open an editor to change the config file').action(async () => {
-    //Perform the intial config file generation if not already there
     console.warn("TODO")
 })
 
 program.command('add-instance').description('Add a new instance to the config file').action(async () => {
-    //Perform the intial config file generation if not already there
     console.warn("TODO")
 })
 
 program.command('clean-instance').argument('<id>').description('Remove an instance so that it is reconstructed during the next `apply`').action(async () => {
-    //Perform the intial config file generation if not already there
     console.warn("TODO")
 })
 

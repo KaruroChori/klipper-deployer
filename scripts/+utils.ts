@@ -35,6 +35,7 @@ export async function get_env(config: schema) {
     const distroInfo = await Bun.file('/etc/os-releases').text()
     //TODO parsing
 
+    //TODO Select the relevant target, not just a random one
     const t = (await import('./targets/debian-12'))
     const w = {
         install_packages: t.install_packages(config),

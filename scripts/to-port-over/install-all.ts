@@ -1,5 +1,5 @@
 #!/bin/env bun
-import { get_config, get_env } from "./@utils";
+import { get_config, get_env } from "../+utils";
 
 try {
     const config = await get_config();

@@ -4,7 +4,7 @@
 
 import { $ } from "bun";
 import { schema } from "@schemas/main.schema.ts"
-import { get_config } from "./@utils";
+import { get_config } from "../+utils";
 import os from 'node:os'
 
 const config = await get_config();
