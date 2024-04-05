@@ -7,45 +7,39 @@ import chalk from "chalk"
 program.name('klipper-deployer').description('CLI to deploy klipper and its ecosystem on your node.\nUse all for the quick option.').version(version)
 
 program.command('init').description('Initialize a klipper environment in the current folder.').action(async () => {
-    //Perform the intial config file generation if not already there
-    (await import("../scripts/gen-config.ts"))
+    //(await import("../scripts/gen-config.ts"))
 })
 
-program.command('clone').description('Clone all repos according to the current configuration & install deps').action(async () => {
-    //Perform the intial config file generation if not already there
-    (await import("../scripts/clone-all.ts"))
-})
-
-program.command('pull').description('Pull updates for the current repos & install deps').action(async () => {
-    //Perform the intial config file generation if not already there
-    (await import("../scripts/pull-all.ts"))
+program.command('commit').description('Confirm the current file being edited as source for all next steps.').action(async () => {
 })
 
 
-program.command('install').description('Apply the instances section of the config file.').action(async () => {
-    //Perform the intial config file generation if not already there
-    (await import("../scripts/install-all.ts"))
+program.command('clone').description('Clone all repos according to the current configuration').action(async () => {
+    //(await import("../scripts/clone-all.ts"))
 })
 
-program.command('new').description('Add a new instance').option('install', "Automatically spawn the new instance after configuration", false).action(async () => {
-    //Perform the intial config file generation if not already there
-    console.warn("TODO")
+program.command('pull').description('Pull updates for the current repos').action(async () => {
+    //(await import("../scripts/pull-all.ts"))
 })
 
-program.command('clean').description('Remove all instances').action(async () => {
-    //Perform the intial config file generation if not already there
-    (await import("../scripts/remove-instance.ts"))
+
+program.command('install').description('Install deps for all services needed and prepare global ones.').action(async () => {
+    //(await import("../scripts/install-deps.ts"))
 })
 
-program.command('shell').description('Open a shell to compile a klipper firmware').action(async () => {
-    //Perform the intial config file generation if not already there
-    (await import("../scripts/env-shell.ts"))
+program.command('uninstall').description('Remove venvs for all services and remove global ones.').action(async () => {
+    //(await import("../scripts/uninstall-deps.ts"))
 })
 
-program.command('edit-config').description('Open an editor to change the config file').action(async () => {
-    //Perform the intial config file generation if not already there
-    console.warn("TODO")
+
+program.command('apply').description('Install all instances for which a folder is not there yet.').action(async () => {
 })
+
+
+
+//////////////////////////////////////////////
+// Operations on services
+//////////////////////////////////////////////
 
 program.command('start').description('Start all services').action(async () => {
     //Perform the intial config file generation if not already there
@@ -57,19 +51,45 @@ program.command('stop').description('Stop all services').action(async () => {
     console.warn("TODO")
 })
 
-program.command('restart').description('Restart all services').action(async () => {
+//////////////////////////////////////////////
+// Quick operations via complete presets
+//////////////////////////////////////////////
+
+program.command('presets').description('List all available presets.').action(() => {
+    console.log('Not implemented')
+})
+
+program.command('preset').argument('<name>').description('One enter operation using one of the default presets.').action(async () => {
+    //(await import("../scripts/gen-config.ts"));
+    //(await import("../scripts/clone-all.ts"));
+    //(await import("../scripts/install-all.ts"));
+    //console.warn("TODO")
+})
+
+//////////////////////////////////////////////
+// Convenience operations
+//////////////////////////////////////////////
+
+program.command('klipper-shell').description('Open a shell to compile a klipper firmware with the correct env for toolchains.').action(async () => {
+    //Perform the intial config file generation if not already there
+    (await import("../scripts/env-shell.ts"))
+})
+
+program.command('edit-config').description('Open an editor to change the config file').action(async () => {
     //Perform the intial config file generation if not already there
     console.warn("TODO")
 })
 
-program.command('all').description('init+clone+install+start').action(async () => {
+program.command('add-instance').description('Add a new instance to the config file').action(async () => {
     //Perform the intial config file generation if not already there
-    //TODO Maybe I could provide multiple profiles aside from the config file generated by default?
-    (await import("../scripts/gen-config.ts"));
-    (await import("../scripts/clone-all.ts"));
-    (await import("../scripts/install-all.ts"));
     console.warn("TODO")
 })
+
+program.command('clean-instance').argument('<id>').description('Remove an instance so that it is reconstructed during the next `apply`').action(async () => {
+    //Perform the intial config file generation if not already there
+    console.warn("TODO")
+})
+
 
 
 console.log(chalk.blue(chalk.italic(`

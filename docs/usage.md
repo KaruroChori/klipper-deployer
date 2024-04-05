@@ -1,7 +1,7 @@
 Referencing [diagram](./usage.drawio).  
 A minimal list of operations to be supported by the CLI.
 
-## config
+## init
 
 Generate a new uncommitted config file in the local folder, or fill in the uncommitted one with defaults from the schema.
 
