@@ -18,7 +18,7 @@ try {
     const distroInfo = await Bun.file('/etc/os-releases').text()
     //TODO parsing
 
-    const install_packages = await get_env()
+    const { install_packages } = await get_env()
 
     await install_packages.system(config);
 

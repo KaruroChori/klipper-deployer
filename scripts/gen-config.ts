@@ -11,11 +11,10 @@ if (!await fs.exists('./config')) {
     await $`mkdir ./config`;
 }
 else {
-    //await $`cp -r ./config/ ./config.backup-${Date.now()}`
-    await $`ls`
+    await $`cp -r ./config/ ./config.backup-${Date.now()}`
 }
+
 let config: schema | {} | undefined = undefined;
-console.log('ss')
 
 try {
     config = JSON.parse(await Bun.file('./config/main.json').text())

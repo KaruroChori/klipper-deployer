@@ -1,6 +1,7 @@
 
 import { Value } from "@sinclair/typebox/value"
 import { schema } from "@schemas/main.schema.ts"
+import os from 'node:os'
 
 export async function get_config() {
     let config: schema;
@@ -25,10 +26,16 @@ export async function get_config() {
 
 
 export async function get_env() {
+    if (os.platform() !== 'linux') {
+        console.error('This utility can only be run on linux')
+        process.exit(1)
+    }
+
+
     const distroInfo = await Bun.file('/etc/os-releases').text()
     //TODO parsing
 
-    const install_packages = (await import('./targets/debian-12')).install_packages
+    const t = (await import('./targets/debian-12'))
 
-    return install_packages
+    return t
 }

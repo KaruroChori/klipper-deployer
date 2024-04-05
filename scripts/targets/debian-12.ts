@@ -2,8 +2,7 @@
 import { $ } from "bun";
 import { schema } from "@schemas/main.schema.ts"
 
-//By default, all folders are removed except for the venv as it would take forever.
-//TODO: Provide option to force the venv reconstruction.
+//TODO: Once new platforms will be supported, move portable code to @commons.
 
 export const install_packages = {
     system: async (config: schema) => {
@@ -48,7 +47,6 @@ export const install_packages = {
     },
     moonraker: async (config: schema) => {
         //TODO: Basically an alternative implementation for ./install-moonraker.sh split across make_intance and here.
-        //await $`cd ${config.install.base}/repos/moonraker/scripts && ./install-moonraker.sh`
 
         let PKGLIST = ""
         PKGLIST = `${PKGLIST} python3 python3-virtualenv python3-dev liblmdb-dev`
@@ -68,14 +66,101 @@ export const install_packages = {
 
     },
     fluidd: async (config: schema) => {
+        console.log("Removing previous instance if present:")
+        await $`sudo service stop fluidd`
+        await $`sudo rm ${config.install.systemd}/fluidd.service`
         let PKGLIST = "python3";
-        console.log("Installing Fluidd Dependencies:")
+        console.log("Installing Fluidd dependencies:")
         await $`sudo apt install ${PKGLIST} --yes`
+        console.log("Generating service files:")
+        await $`sudo echo ${(await import('@templates/fluidd.service')).default(config)} > ${config.install.systemd}/fluidd.service`
+        await $`sudo service start fluidd`
+
     },
     mainsail: async (config: schema) => {
+        console.log("Removing previous instance if present:")
+        await $`sudo service stop mainsail`
+        await $`sudo rm ${config.install.systemd}/mainsail.service`
         let PKGLIST = "python3";
-        console.log("Installing Fluidd Dependencies:")
+        console.log("Installing mainsail dependencies:")
         await $`sudo apt install ${PKGLIST} --yes`
+        console.log("Generating service files:")
+        await $`sudo echo ${(await import('@templates/mainsail.service')).default(config)} > ${config.install.systemd}/mainsail.service`
+        await $`sudo service start mainsail`
+
+    }
+}
+
+export const uninstall_packages = {
+    system: async (config: schema) => {
+
+    },
+    klipper: async (config: schema) => {
+        console.log("Removing klipper venv:")
+        await $`rm -rf ${config.install.base}/moonraker_env`
+
+    },
+    moonraker: async (config: schema) => {
+        console.log("Removing moonraker venv:")
+        await $`rm -rf ${config.install.base}/moonraker_env`
+
+    },
+    fluidd: async (config: schema) => {
+        console.log("Removing previous instance if present:")
+        await $`sudo service stop fluidd`
+        await $`sudo rm ${config.install.systemd}/fluidd.service`
+    },
+    mainsail: async (config: schema) => {
+        console.log("Removing previous instance if present:")
+        await $`sudo service stop mainsail`
+        await $`sudo rm ${config.install.systemd}/mainsail.service`
+    }
+}
+
+export const clone = {
+    system: async (config: schema) => {
+
+    },
+    klipper: async (config: schema) => {
+        console.log('Cloning klipper')
+        await $`mkdir -p ${config.install.base}/repos/ && cd ${config.install.base}/repos/ &&  git clone ${config.services.klipper!.repo} --branch ${config.services.klipper!.branch} --depth 1`
+    },
+    moonraker: async (config: schema) => {
+        console.log('Cloning moonraker')
+        await $`mkdir -p ${config.install.base}/repos/ && cd ${config.install.base}/repos/ &&  git clone ${config.services.moonraker!.repo} --branch ${config.services.moonraker!.branch} --depth 1`
+
+    },
+    fluidd: async (config: schema) => {
+        console.log('Cloning mainsail')
+        await $`mkdir -p ${config.install.base}/repos/mainsail && cd ${config.install.base}/repos/mainsail &&  wget ${config.services.mainsail!.repo}/releases/download/${config.services.mainsail!.tag}/mainsail.zip && unzip mainsail.zip && rm mainsail.zip`
+    },
+    mainsail: async (config: schema) => {
+        console.log('Cloning fluidd')
+        await $`mkdir -p ${config.install.base}/repos/fluidd && cd ${config.install.base}/repos/fluidd &&  wget ${config.services.fluidd!.repo}/releases/download/${config.services.fluidd!.tag}/fluidd.zip && unzip fluidd.zip && rm fluidd.zip`
+    }
+}
+
+export const clean = {
+    system: async (config: schema) => {
+
+    },
+    klipper: async (config: schema) => {
+        console.log("Removing klipper repo:")
+        await $`rm -rf ${config.install.base}/repos/klipper`
+
+    },
+    moonraker: async (config: schema) => {
+        console.log("Removing moonraker repo:")
+        await $`rm -rf ${config.install.base}/repos/moonraker`
+
+    },
+    fluidd: async (config: schema) => {
+        console.log("Removing fluidd repo:")
+        await $`rm -rf ${config.install.base}/repos/fluidd`
+    },
+    mainsail: async (config: schema) => {
+        console.log("Removing mainsail repo:")
+        await $`rm -rf ${config.install.base}/repos/mainsail`
     }
 }
 
@@ -88,10 +173,10 @@ export const make_instance = {
         //TODO
     },
     fluidd: async (config: schema) => {
-        //TODO
+        //Nothing to do. Manual configuration needed in the client to add all moonraker addresses.
     },
     mainsail: async (config: schema) => {
-        //TODO
+        //Nothing to do. Manual configuration needed in the client to add all moonraker addresses.
     }
 }
 
@@ -104,9 +189,9 @@ export const delete_instance = {
         //TODO
     },
     fluidd: async (config: schema) => {
-        //TODO
+        //Nothing to do. Manual configuration needed in the client to add all moonraker addresses.
     },
     mainsail: async (config: schema) => {
-        //TODO
+        //Nothing to do. Manual configuration needed in the client to add all moonraker addresses.
     }
 }

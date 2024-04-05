@@ -2,12 +2,11 @@
 
 
 import { $ } from "bun";
-import os from 'node:os'
 import { get_config, get_env } from "./@utils";
 
 
 const config = await get_config();
-
+const { make_instance } = await get_env();
 
 if (os.platform() !== 'linux') {
     console.error('This utility can only be run on linux')
