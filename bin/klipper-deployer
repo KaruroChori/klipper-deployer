@@ -1,2 +1,71 @@
 #!/bin/env bun
-//TODO: main entry point for sub-commands. To be added to PATH
+
+import { program } from "commander"
+import { version } from "../package.json"
+import chalk from "chalk"
+
+program.name('klipper-deployer').description('CLI to deploy klipper and its ecosystem on your node.\nUse all for the quick option.').version(version)
+
+program.command('init').description('Initialize a klipper environment in the current folder.').action(async () => {
+    //Perform the intial config file generation if not already there
+    (await import("../scripts/gen-config.ts"))
+})
+
+program.command('clone').description('Clone all repos according to the current configuration.').action(async () => {
+    //Perform the intial config file generation if not already there
+    (await import("../scripts/clone-all.ts"))
+})
+
+
+program.command('install').description('Install all dependencies and build environments for the services needed.').action(async () => {
+    //Perform the intial config file generation if not already there
+    (await import("../scripts/install-all.ts"))
+})
+
+program.command('add').description('Add a new instance').action(async () => {
+    //Perform the intial config file generation if not already there
+    console.warn("TODO")
+})
+
+program.command('clean').description('Remove all instances').action(async () => {
+    //Perform the intial config file generation if not already there
+    (await import("../scripts/remove-all.ts"))
+})
+
+program.command('shell').description('Open a shell to compile a klipper firmware').action(async () => {
+    //Perform the intial config file generation if not already there
+    (await import("../scripts/env-shell.ts"))
+})
+
+program.command('start').description('Start all services').action(async () => {
+    //Perform the intial config file generation if not already there
+    console.warn("TODO")
+})
+
+program.command('stop').description('Stop all services').action(async () => {
+    //Perform the intial config file generation if not already there
+    console.warn("TODO")
+})
+
+program.command('restart').description('Restart all services').action(async () => {
+    //Perform the intial config file generation if not already there
+    console.warn("TODO")
+})
+
+program.command('all').description('init+clone+install+start').action(async () => {
+    //Perform the intial config file generation if not already there
+    (await import("../scripts/gen-config.ts"));
+    (await import("../scripts/clone-all.ts"));
+    (await import("../scripts/install-all.ts"));
+    console.warn("TODO")
+})
+
+
+console.log(chalk.blue(chalk.italic(`
+╭───────────────────────────────────────────────────────╮
+│ WIP, most functions are not fully operational yet.    │
+│ The interface is likely to change as well.         🍆 │
+╰───────────────────────────────────────────────────────╯
+`)))
+
+await program.parseAsync()

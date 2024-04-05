@@ -6,12 +6,17 @@ import { schema } from "@schemas/main.schema.ts"
 import { Value } from "@sinclair/typebox/value";
 import fs from 'node:fs/promises'
 
+
 if (!await fs.exists('./config')) {
     await $`mkdir ./config`;
 }
-else await $`cp -r ./config/ ./config.backup-${Date.now()}`
-
+else {
+    //await $`cp -r ./config/ ./config.backup-${Date.now()}`
+    await $`ls`
+}
 let config: schema | {} | undefined = undefined;
+console.log('ss')
+
 try {
     config = JSON.parse(await Bun.file('./config/main.json').text())
 }
@@ -22,4 +27,6 @@ catch (e) {
 Value.Default(schema, config)
 console.error(...Value.Errors(schema, config))
 
+
 await Bun.write('./config/main.json', JSON.stringify(config, undefined, 4))
+

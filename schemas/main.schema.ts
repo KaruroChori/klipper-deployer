@@ -3,7 +3,7 @@ import { Static, Type as t } from "@sinclair/typebox"
 const w = t.Object({
     "install": t.Object({
         base: t.String({ default: `${process.env.HOME}/klipper-deployer` }),
-        "gcode-nfs": t.Optional(t.String({ description: "If set, the gcode folder will include a remote subdir which is mounted to a remote location" })),
+        "nfs": t.Optional(t.String({ description: "If set, the gcode folder will include a remote subdir which is mounted to a remote location" })),
         user: t.String({ default: process.env.USER ?? 'user', description: "The user to use to run those services" }),
         systemd: t.String({ default: '/etc/systemd/system', description: "Folder for the system deamon" }),
         toolchains: t.Optional(t.Object({
@@ -48,7 +48,8 @@ const w = t.Object({
     , instances: t.Record(t.String(), t.Object({
         "moonraker": t.Object({
             "port": t.Number()
-        }, { additionalProperties: false })
+        }, { additionalProperties: false }),
+        "nfs": t.Optional(t.String({ description: "If set, the gcode folder will include an instance-specific remote subdir mounted from a remote location" })),
     }), { default: { 0: { moonraker: { port: 7125 } } } })
 }, { default: {}, additionalProperties: false })
 

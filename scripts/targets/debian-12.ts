@@ -12,7 +12,7 @@ export const install_packages = {
 
         //Basic utilities
         console.log("Installing basic utilities...")
-        await $`sudo apt install git wget curl unzip --yes`
+        await $`sudo apt install git wget curl unzip nfs-common --yes`
     },
     klipper: async (config: schema) => {
         // Update system package info
