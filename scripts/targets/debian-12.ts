@@ -1,6 +1,7 @@
 import { $ } from "bun";
 import { schema } from "@schemas/main.schema.ts"
 import { existsSync } from "node:fs"
+
 //TODO: Once new platforms will be supported, move portable code to @commons.
 
 export const install_packages = (config: schema) => {

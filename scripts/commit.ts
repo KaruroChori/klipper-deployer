@@ -1,6 +1,10 @@
 #!/bin/env bun
 
-const main = async () => { }
+const main = async () => {
+    //TODO cp config to config-timestamp
+    //Symbol link config-current to the latest config-timestamp
+
+}
 
 export default main
 
