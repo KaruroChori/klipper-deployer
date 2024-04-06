@@ -6,7 +6,7 @@ import os from 'node:os'
 export async function get_config() {
     let config: schema;
     try {
-        config = JSON.parse(await Bun.file('./config/main.json').text())
+        config = JSON.parse(await Bun.file('./config-current/main.json').text())
     }
     catch (e) {
         console.log('No config file found, run the gen-config script or write one!')

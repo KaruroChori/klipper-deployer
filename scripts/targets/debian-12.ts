@@ -1,6 +1,6 @@
 import { $ } from "bun";
 import { schema } from "@schemas/main.schema.ts"
-
+import { existsSync } from "node:fs"
 //TODO: Once new platforms will be supported, move portable code to @commons.
 
 export const install_packages = (config: schema) => {
@@ -122,9 +122,6 @@ export const uninstall_packages = (config: schema) => {
 
 export const clone = (config: schema) => {
     return {
-        system: async () => {
-
-        },
         klipper: async () => {
             console.log('Cloning klipper')
             await $`mkdir -p ${config.install.base}/repos/ && cd ${config.install.base}/repos/ &&  git clone ${config.services.klipper!.repo} --branch ${config.services.klipper!.branch} --depth 1`
@@ -147,9 +144,6 @@ export const clone = (config: schema) => {
 
 export const pull = (config: schema) => {
     return {
-        system: async () => {
-
-        },
         klipper: async () => {
             console.log('Pulling klipper')
             await $`cd ${config.install.base}/repos/ &&  git pull`
@@ -157,14 +151,6 @@ export const pull = (config: schema) => {
         moonraker: async () => {
             console.log('Pulling moonraker')
             await $`cd ${config.install.base}/repos/ &&  git pull`
-        },
-        fluidd: async () => {
-            console.log('Replacing mainsail')
-            await $`cd ${config.install.base}/repos/mainsail && rm -rf ./* && wget ${config.services.mainsail!.repo}/releases/download/${config.services.mainsail!.tag}/mainsail.zip && unzip mainsail.zip && rm mainsail.zip`
-        },
-        mainsail: async () => {
-            console.log('Replacing fluidd')
-            await $`cd ${config.install.base}/repos/fluidd && rm -rf ./* &&  wget ${config.services.fluidd!.repo}/releases/download/${config.services.fluidd!.tag}/fluidd.zip && unzip fluidd.zip && rm fluidd.zip`
         }
     }
 }
@@ -197,36 +183,38 @@ export const clean = (config: schema) => {
 
 //Code which creates the specific instance running
 export const make_instance = (config: schema, name: string) => {
+    if (config.instances[name] === undefined) { throw { code: 1, msg: `Instance ${name} not defined in the base file.` } }
+    const hasFolder = existsSync(`${config.install.base}/instances/${name}`)
+    if (hasFolder) {
+        throw { code: 2, msg: `Ignoring instance ${name} as it was already constructed before.` }
+    }
     return {
+        system: async () => {
+        },
         klipper: async () => {
             //TODO
         },
         moonraker: async () => {
             //TODO
-        },
-        fluidd: async () => {
-            //Nothing to do. Manual configuration needed in the client to add all moonraker addresses.
-        },
-        mainsail: async () => {
-            //Nothing to do. Manual configuration needed in the client to add all moonraker addresses.
         }
     }
 }
 
 //Code which creates the specific instance running
 export const delete_instance = (config: schema, name: string) => {
+    if (config.instances[name] === undefined) { throw { code: 1, msg: `Instance ${name} not defined in the base file.` } }
+    const hasFolder = existsSync(`${config.install.base}/instances/${name}`)
+    if (!hasFolder) {
+        throw { code: 2, msg: `Ignoring instance ${name} as it has not been built.` }
+    }
     return {
+        system: async () => {
+        },
         klipper: async () => {
             //TODO
         },
         moonraker: async () => {
             //TODO
-        },
-        fluidd: async () => {
-            //Nothing to do. Manual configuration needed in the client to add all moonraker addresses.
-        },
-        mainsail: async () => {
-            //Nothing to do. Manual configuration needed in the client to add all moonraker addresses.
         }
     }
 }

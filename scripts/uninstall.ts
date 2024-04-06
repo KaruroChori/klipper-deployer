@@ -1,6 +1,31 @@
 #!/bin/env bun
+import { $ } from "bun";
+import { get_config, get_env } from "./+utils";
 
-const main = async () => { }
+const main = async () => {
+    const config = await get_config();
+    const { uninstall_packages, } = await get_env(config)
+
+    await uninstall_packages.system();
+
+    if (config.services.klipper?.enabled === true) {
+        await uninstall_packages.klipper();
+    }
+
+    if (config.services.moonraker?.enabled === true) {
+        await uninstall_packages.moonraker();
+    }
+
+    if (config.services.mainsail?.enabled === true) {
+        await uninstall_packages.mainsail();
+    }
+
+    if (config.services.fluidd?.enabled === true) {
+        await uninstall_packages.fluidd();
+    }
+
+    console.log("Global services uninstalled, venvs removed!")
+}
 
 export default main
 
