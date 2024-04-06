@@ -51,12 +51,12 @@ enable_auto_refresh: True
 [announcements]
 subscriptions:
   fluidd
-
-[update_manager fluidd]
+${opts.services.fluidd?.enabled ?
+        `[update_manager fluidd]
 type: web
 repo: ${opts.services.fluidd?.repo}
 path: ${opts.install.base}/repos
-
+}`: ''}
 [machine]
 provider: systemd_dbus
 `

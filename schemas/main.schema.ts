@@ -2,7 +2,7 @@ import { Static, Type as t } from "@sinclair/typebox"
 
 const w = t.Object({
     "install": t.Object({
-        base: t.String({ default: `${process.env.HOME}/klipper-deployer` }),
+        base: t.String({ default: `${process.env.PWD}` }),
         "nfs": t.Optional(t.String({ description: "If set, the gcode folder will include a remote subdir which is mounted to a remote location" })),
         user: t.String({ default: process.env.USER ?? 'user', description: "The user to use to run those services" }),
         systemd: t.String({ default: '/etc/systemd/system', description: "Folder for the system deamon" }),
@@ -38,13 +38,13 @@ const w = t.Object({
             enabled: t.Boolean({ default: false }),
             repo: t.String({ default: 'https://github.com/fluidd-core/fluidd' }),
             tag: t.String({ default: 'v1.29.1' }),
-            port: t.Number({ default: '80' })
+            port: t.Number({ default: 80 })
         }, { default: {}, additionalProperties: false })),
         "mainsail": t.Optional(t.Object({
             enabled: t.Boolean({ default: false }),
             repo: t.String({ default: 'https://github.com/mainsail-crew/mainsail' }),
             tag: t.String({ default: 'v2.10.0' }),
-            port: t.Number({ default: '80' })
+            port: t.Number({ default: 80 })
         }, { default: {}, additionalProperties: false })),
     }, { default: {}, additionalProperties: false })
     , instances: t.Record(t.String(), t.Object({

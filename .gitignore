@@ -3,3 +3,4 @@ bun.lockb
 /backups
 /config
 /current-config
+/testdir

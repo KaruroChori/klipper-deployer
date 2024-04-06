@@ -14,10 +14,9 @@ export async function get_config() {
     }
 
     const t = Value.Default(schema, config)
-    console.error(...Value.Errors(schema, config))
-
-    if (t === false) {
-        console.error('Config file not valid!')
+    if (Value.Errors.length != 0) {
+        console.error(`Errors in the config file!`)
+        console.error(...Value.Errors(schema, config))
         process.exit(1)
     }
 
@@ -32,7 +31,7 @@ export async function get_env(config: schema) {
     }
 
 
-    const distroInfo = await Bun.file('/etc/os-releases').text()
+    const distroInfo = await Bun.file('/etc/os-release').text()
     //TODO parsing
 
     //TODO Select the relevant target, not just a random one

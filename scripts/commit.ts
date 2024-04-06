@@ -7,6 +7,8 @@ const main = async () => {
     const newname = `./backups/config-${Date.now()}`
     await $`mkdir -p ./backups/ && cp -r ./config ${newname}`
     await $`ln -sfn  ${newname} $PWD/current-config `
+
+    console.log(`Done!`)
 }
 
 export default main
