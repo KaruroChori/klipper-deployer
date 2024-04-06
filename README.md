@@ -1,4 +1,4 @@
-> [!WARNING]
+> [!CAUTION]
 > All this is very much work in progress; not all features are working, even when documented.
 
 I recently got a [wyse 3040](https://www.dell.com/support/manuals/de-de/wyse-3040-thin-client/3040_ug/system) to serve as a node on my network, and to handle multiple printers/cnc stuff.  
@@ -36,7 +36,7 @@ There are few ways to install this tool on your system. The easiest is to do it 
 bun install --global klipper-deployer
 ```
 
-> [!WARNING]
+> [!NOTE]
 > This will not work right now.
 > The package as not been released yet, so either you install it from the github repository, or you clone and use it from there.
 
@@ -61,7 +61,7 @@ First, start with
 klipper-deployer init
 ```
 
-> [!INFO]
+> [!TIP]
 > In most cases you don't want separate independent configurations, but many instances within the same configuration.
 > Still, you can run this script on multiple folders to have independent configurations not sharing the same global services and venvs.
 > However, take care you are not introducing collisions in instance names by setting different prefixes in the config file.
