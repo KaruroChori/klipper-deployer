@@ -62,9 +62,9 @@ klipper-deployer init
 ```
 
 > [!TIP]
-> In most cases you don't want separate independent configurations, but many instances within the same configuration.
-> Still, you can run this script on multiple folders to have independent configurations not sharing the same global services and venvs.
-> However, take care you are not introducing collisions in instance names by setting different prefixes in the config file.
+> In most cases you don't want separate independent configurations, but many instances within the same configuration.  
+> Still, you can run this script on multiple folders to have independent configurations not sharing the same global services and venvs.  
+> However, take care you are not introducing collisions in instance names by setting different prefixes in the config file.  
 > Also, make sure that you specify different ports.
 
 An initial config file will be generated if not already present, or the one you wrote will be expanded to express defaults for most of the additional field you did not write.  
