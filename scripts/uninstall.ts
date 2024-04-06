@@ -6,8 +6,6 @@ const main = async () => {
     const config = await get_config();
     const { uninstall_packages, } = await get_env(config)
 
-    await uninstall_packages.system();
-
     if (config.services.klipper?.enabled === true) {
         await uninstall_packages.klipper();
     }
@@ -23,6 +21,8 @@ const main = async () => {
     if (config.services.fluidd?.enabled === true) {
         await uninstall_packages.fluidd();
     }
+
+    await uninstall_packages.system();
 
     console.log("Global services uninstalled, venvs removed!")
 }

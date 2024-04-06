@@ -13,7 +13,7 @@ host: 0.0.0.0
 port: ${opts.instances[instance].moonraker.port}
 # Make sure the klippy_uds_address is correct.  It is initialized
 # to the default address.
-klippy_uds_address: /tmp/klippy_uds_${instance}
+klippy_uds_address: /tmp/klippy_uds_${`${opts.install.prefix}-` ?? ''}${instance}
 
 [file_manager]
 # cancel object preprocessing - set to True to enable; leave disabled when running on a low-powered device (e.g. Pi Zero)
