@@ -7,9 +7,10 @@
 - [ ] Implement deploy
 - [x] Implement unified CLI backbone in ./bin/klipper-deployer
 - [x] Add basic documentation
-- [ ] Add full tutorial
-- [ ] Distribute as a NPM package
 
 ## Path to beta 1
 
 - [ ] Add proper config files for the quick profiles
+- [ ] Add the documentation as a man page
+- [ ] Add full tutorial
+- [ ] Distribute as a NPM package

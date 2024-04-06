@@ -6,6 +6,7 @@ const w = t.Object({
         "nfs": t.Optional(t.String({ description: "If set, the gcode folder will include a remote subdir which is mounted to a remote location" })),
         user: t.String({ default: process.env.USER ?? 'user', description: "The user to use to run those services" }),
         systemd: t.String({ default: '/etc/systemd/system', description: "Folder for the system deamon" }),
+        prefix: t.Optional(t.String({ description: 'Prefix for this configuration, only needed if you have multiple on the same system.' })),
         toolchains: t.Optional(t.Object({
             avr: t.Optional(t.String({ description: 'Path for an external avr toolchain' })),
             arm32: t.Optional(t.String({ description: 'Path for an external arm32 toolchain' }))

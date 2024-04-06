@@ -1,27 +1,32 @@
-> **Notice!** all this is very much work in progress; not all features are working, even when documented.
+> [!WARNING]
+> All this is very much work in progress; not all features are working, even when documented.
 
-I recently got a wyse 3040 to serve as a node on my network, and to handle multiple printers.  
-It is an atom-powered thin client, roughly the size of a raspberry pi; so, no surprise, it only comes with 2GB of RAM and 8GB of flash storage.  
+I recently got a [wyse 3040](https://www.dell.com/support/manuals/de-de/wyse-3040-thin-client/3040_ug/system) to serve as a node on my network, and to handle multiple printers/cnc stuff.  
+It is an atom-based thin-client, roughly the size of a raspberry pi; so, no surprise, it only comes with 2GB of RAM and 8GB of flash storage.  
 Hence, docker-based solutions like [portable-klipper](https://github.com/KaruroChori/portable-klipper) are not really feasible.  
 On paper [kiauh](https://github.com/dw-0/kiauh) offers a more lightweight approach, but it does not work for several reasons:
 
 - There is no good way to add multiple instances after the initial setup.
-- The base repositories for klipper and moonraker are fully cloned, leading to a signicant waste of time and storage during the initial setup.
-- By default it installs the same dependencies specified on the original install scripts, but there is no point in having all those toolchains if at no point we are expecting to compile the firmware on the node itself.
+- The base repositories for klipper and moonraker are fully cloned, leading to a significant waste of time and storage during the initial setup.
+- By default, it installs the same dependencies specified on the original installation scripts, but there is no point in having all those toolchains if at no point we are expecting to compile the firmware on the node itself.
 
-For these reasons, I have been working on my own scripts to simplify the deployment process of klipper & friends on hardware with low end specs.  
-A nice extra over a solution like _kiauh_ is how much easily it can be integrated in automated processes.
+For these reasons, I have been working on my own scripts to simplify the deployment process of klipper & friends on hardware with low-end specs.  
+A nice extra over a solution like _kiauh_ is how much more easily it can be integrated in automated processes since it is all based on configuration files and few command lines at best.
 
 # How to use it
 
-This package provides a single executable `klipper-deployer` once installed.  
-Using it without parameters will show the different options which are available.
+This package provides a single executable `klipper-deployer` once installed on your system.  
+Calling it from your shell will display all the options available, but please read through this documentation before.
 
 ## System Requirements
 
-- [ ] Base system should be Debian 12. Other systems might work as well. In general support for other systems will be added over time.
-- [ ] The user you are running it from should be in your sudoers file.
-- [ ] Install [bun](https://github.com/oven-sh/bun) on the target machine (on linux `curl -fsSL https://bun.sh/install | bash`).
+Before using it, you have to make sure your system fulfills some requirements:
+
+- [ ] Your system should be Debian 12. Other derived systems might work as well as long as packet names are the same.
+- [ ] The user you are running it from must be in your sudoers file.
+- [ ] Install [bun](https://github.com/oven-sh/bun) on the target machine (on linux `curl -fsSL https://bun.sh/install | bash`). This script is written in typescript to keep my sanity.
+
+In general, support for more systems will be added over time.
 
 ## Initial installation
 
@@ -31,28 +36,59 @@ There are few ways to install this tool on your system. The easiest is to do it 
 bun install --global klipper-deployer
 ```
 
+> [!WARNING]
+> This will not work right now.
+> The package as not been released yet, so either you install it from the github repository, or you clone and use it from there.
+
 After that, you should be able to use `klipper-deployer` where you want.  
-Go to the directory you want to use to host klipper & everything related; after that run
+Go to the directory you want to use to host klipper & everything related.
+
+You now have two options: either you use one of the quick presets, or you perform the process manually.
+
+### Quick preset
+
+Typing `klipper-deployer presets` will give you a list of presets available.  
+Select the one you want, and type `klipper-deployer preset name` to have everything automatically installed and running.  
+Check the [documentation]() too see which presets are shipped with your version of _klipper-deployer_.
+
+You should still check the supported commands in order to further apply changes to your current configuration.
+
+### Custom config
+
+First, start with
 
 ```
 klipper-deployer init
 ```
 
-or, if you want to perform the super quick automatic install
+> [!INFO]
+> In most cases you don't want separate independent configurations, but many instances within the same configuration.
+> Still, you can run this script on multiple folders to have independent configurations not sharing the same global services and venvs.
+> However, take care you are not introducing collisions in instance names by setting different prefixes in the config file.
+> Also, make sure that you specify different ports.
+
+An initial config file will be generated if not already present, or the one you wrote will be expanded to express defaults for most of the additional field you did not write.  
+You can manually inspect it in `/config/main.json`. The subcommand `edit-config` is a handy shortcut.  
+There are few helpers like `add-instance` and `clean-instance <id>` to further edit it.
+
+Once you are happy with your file, you can run these commands in sequence
 
 ```
-klipper-deployer all
+klipper-deployer commit     #To save the current config file as current.
+klipper-deployer clone      #To clone all repos.
+klipper-deployer install    #To install all deps for your repos & generate venvs.
+klipper-deployer apply      #To add instances based on your configuration.
+klipper-deployer start      #To start all global and instance-based services.
 ```
-
-### Backup folders
-
-Backup folders for the previous configurations are automatically generated when changes are committed.  
-Please, notice this does not include changes in the printer configuration, just changes in \*.service files.
 
 ## Customize the configuration
 
+TBW
+
 ### NFS share
+
+TBW
 
 ### Custom toolchains
 
-### Running multiple instances
+TBW
