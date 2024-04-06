@@ -1,4 +1,4 @@
-import { schema } from "@schemas/main.schema";
+import { schema } from "../schemas/main.schema";
 
 /*
 TODO:

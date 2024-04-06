@@ -1,5 +1,5 @@
 import { $ } from "bun";
-import { schema } from "@schemas/main.schema.ts"
+import { schema } from "../../schemas/main.schema.ts"
 import { existsSync } from "node:fs"
 
 //TODO: Once new platforms will be supported, move portable code to @commons.
@@ -68,26 +68,30 @@ export const install_packages = (config: schema) => {
         },
         fluidd: async () => {
             console.log("Removing previous instance if present:")
-            await $`sudo service stop fluidd`
+            await $`sudo service stop ${`${config.install.prefix}-` ?? ''}fluidd`
             await $`sudo rm ${config.install.systemd}/${`${config.install.prefix}-` ?? ''}fluidd.service`
             let PKGLIST = "python3";
             console.log("Installing Fluidd dependencies:")
             await $`sudo apt install ${PKGLIST} --yes`
             console.log("Generating service files:")
-            await $`sudo echo ${(await import('@templates/fluidd.service')).default(config)} > ${config.install.systemd}/${`${config.install.prefix}-` ?? ''}fluidd.service`
-            await $`sudo service start fluidd`
+            await $`sudo echo ${(await import('../../templates/fluidd.service')).default(config)} > ${config.install.systemd}/${`${config.install.prefix}-` ?? ''}fluidd.service`
+
+            await $`sudo systemctl enable ${`${config.install.prefix}-` ?? ''}fluidd.service`
+            await $`sudo service start ${`${config.install.prefix}-` ?? ''}fluidd`
 
         },
         mainsail: async () => {
             console.log("Removing previous instance if present:")
-            await $`sudo service stop mainsail`
+            await $`sudo service stop ${`${config.install.prefix}-` ?? ''}mainsail`
             await $`sudo rm ${config.install.systemd}/${`${config.install.prefix}-` ?? ''}mainsail.service`
             let PKGLIST = "python3";
             console.log("Installing mainsail dependencies:")
             await $`sudo apt install ${PKGLIST} --yes`
             console.log("Generating service files:")
-            await $`sudo echo ${(await import('@templates/mainsail.service')).default(config)} > ${config.install.systemd}/${`${config.install.prefix}-` ?? ''}mainsail.service`
-            await $`sudo service start mainsail`
+            await $`sudo echo ${(await import('../../templates/mainsail.service')).default(config)} > ${config.install.systemd}/${`${config.install.prefix}-` ?? ''}mainsail.service`
+
+            await $`sudo systemctl enable ${`${config.install.prefix}-` ?? ''}mainsail.service`
+            await $`sudo service start ${`${config.install.prefix}-` ?? ''}mainsail`
 
         }
     }
@@ -193,15 +197,24 @@ export const make_instance = (config: schema, name: string) => {
         system: async () => {
         },
         klipper: async () => {
-            //TODO
+            console.log("Generating directories:")
+            await $`mkdir -p ${config.install.base}/instances/${name}/printer_data/logs/`;
+            await $`mkdir -p ${config.install.base}/instances/${name}/printer_data/config/`;
+
             console.log("Generating service files:")
-            await $`sudo echo ${(await import('@templates/klipper.service')).default(config, name)} > ${config.install.systemd}/${`${config.install.prefix}-` ?? ''}klipper-${name}.service`
-            await $`sudo service start ${`${config.install.prefix}-` ?? ''}fluidd`
+            const n = `${`${config.install.prefix}-` ?? ''}klipper-${name}`
+            await $`sudo echo ${(await import('../../templates/klipper.service')).default(config, name)} > ${config.install.systemd}/${n}.service`
+            await $`sudo systemctl enable ${n}.service`
+            await $`sudo service start ${n}`
         },
         moonraker: async () => {
+            console.log("Generating directories:")
+            //TODO
+            const n = `${`${config.install.prefix}-` ?? ''}moonraker-${name}`
             console.log("Generating service files:")
-            await $`sudo echo ${(await import('@templates/moonraker.service')).default(config, name)} > ${config.install.systemd}/${`${config.install.prefix}-` ?? ''}moonraker-${name}.service`
-            await $`sudo service start ${`${config.install.prefix}-` ?? ''}fluidd`
+            await $`sudo echo ${(await import('../../templates/moonraker.service')).default(config, name)} > ${config.install.systemd}/${n}.service`
+            await $`sudo systemctl enable ${n}.service`
+            await $`sudo service start ${n}`
         }
     }
 }
@@ -224,6 +237,47 @@ export const delete_instance = (config: schema, name: string) => {
         moonraker: async () => {
             await $`sudo service stop ${`${config.install.prefix}-` ?? ''}moonraker-${name}`
             await $`sudo rm ${config.install.systemd}/${`${config.install.prefix}-` ?? ''}moonraker-${name}.service`
+        }
+    }
+}
+
+export const start = (config: schema) => {
+    return {
+        system: async () => {
+            if (config.services.klipper?.enabled === true) for (const key of Object.keys(config.instances)) {
+                await $`sudo service stop ${`${config.install.prefix}-` ?? ''}klipper-${key}`
+
+            }
+            if (config.services.moonraker?.enabled === true) for (const key of Object.keys(config.instances)) {
+                await $`sudo service stop ${`${config.install.prefix}-` ?? ''}moonraker-${key}`
+
+            }
+            if (config.services.mainsail?.enabled === true) {
+                await $`sudo service stop ${`${config.install.prefix}-` ?? ''}mainsail`
+            }
+            if (config.services.fluidd?.enabled === true) {
+                await $`sudo service stop ${`${config.install.prefix}-` ?? ''}fluidd`
+            }
+        }
+    }
+}
+export const stop = (config: schema) => {
+    return {
+        system: async () => {
+            if (config.services.mainsail?.enabled === true) {
+                await $`sudo service stop ${`${config.install.prefix}-` ?? ''}mainsail`
+            }
+            if (config.services.fluidd?.enabled === true) {
+                await $`sudo service stop ${`${config.install.prefix}-` ?? ''}fluidd`
+            }
+            if (config.services.moonraker?.enabled === true) for (const key of Object.keys(config.instances)) {
+                await $`sudo service stop ${`${config.install.prefix}-` ?? ''}moonraker-${key}`
+
+            }
+            if (config.services.klipper?.enabled === true) for (const key of Object.keys(config.instances)) {
+                await $`sudo service stop ${`${config.install.prefix}-` ?? ''}klipper-${key}`
+
+            }
         }
     }
 }

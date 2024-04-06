@@ -1,6 +1,6 @@
 #!/bin/env bun
 import { $ } from "bun";
-import { schema } from "@schemas/main.schema.ts"
+import { schema } from "../schemas/main.schema.ts"
 import { Value } from "@sinclair/typebox/value";
 import fs from 'node:fs/promises'
 
@@ -31,5 +31,5 @@ export default main
 
 import { pathToFileURL } from 'url'
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {
-    main()
+    await main()
 }

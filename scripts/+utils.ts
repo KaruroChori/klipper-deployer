@@ -1,15 +1,15 @@
 
 import { Value } from "@sinclair/typebox/value"
-import { schema } from "@schemas/main.schema.ts"
+import { schema } from "../schemas/main.schema.ts"
 import os from 'node:os'
 
 export async function get_config() {
     let config: schema;
     try {
-        config = JSON.parse(await Bun.file('./config-current/main.json').text())
+        config = JSON.parse(await Bun.file('./current-config/main.json').text())
     }
     catch (e) {
-        console.log('No config file found, run the gen-config script or write one!')
+        console.log('No config file found, run the init script, write and commit one!')
         process.exit(1)
     }
 
@@ -45,6 +45,8 @@ export async function get_env(config: schema) {
         pull: t.pull(config),
         make_instance: (i: string) => t.make_instance(config, i),
         delete_instance: (i: string) => t.delete_instance(config, i),
+        start: t.start(config),
+        stop: t.stop(config)
     }
 
     return w

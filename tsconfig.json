@@ -18,12 +18,7 @@
     "allowJs": true,
 
     "types": ["bun-types"],
-    "paths": {
-      "@schemas/*": ["./schemas/*"],
-      "@scripts/*": ["./scripts/*"],
-      "@templates/*": ["./templates/*"],
-      "@config/*": ["./config/*"]
-    }
+    "paths": {}
   }
   //"files": ["./apps/global.d.ts"],
   //"include": []

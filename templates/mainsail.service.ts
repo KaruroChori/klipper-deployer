@@ -1,4 +1,4 @@
-import { schema } from "@schemas/main.schema";
+import { schema } from "../schemas/main.schema";
 
 
 export default (opts: schema) => `#Systemd service file for the Mainsail server

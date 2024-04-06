@@ -36,35 +36,35 @@ program.command('preset').argument('<name>').description('One enter operation us
 //////////////////////////////////////////////
 
 program.command('init').description('Initialize a klipper environment in the current folder.').action(async () => {
-    (await import("../scripts/init.ts")).default()
+    await (await import("../scripts/init.ts")).default()
 })
 
 program.command('commit').description('Confirm the current file being edited as source for all next steps.').action(async () => {
-    (await import("../scripts/commit.ts")).default()
+    await (await import("../scripts/commit.ts")).default()
 
 })
 
 
 program.command('clone').description('Clone all repos according to the current configuration').action(async () => {
-    (await import("../scripts/clone.ts")).default()
+    await (await import("../scripts/clone.ts")).default()
 })
 
 program.command('pull').description('Pull updates for the current repos').action(async () => {
-    (await import("../scripts/pull.ts")).default()
+    await (await import("../scripts/pull.ts")).default()
 })
 
 
 program.command('install').description('Install deps for all services needed and prepare global ones.').action(async () => {
-    (await import("../scripts/install.ts")).default()
+    await (await import("../scripts/install.ts")).default()
 })
 
 program.command('uninstall').description('Remove venvs for all services and remove global ones.').action(async () => {
-    (await import("../scripts/uninstall.ts")).default()
+    await (await import("../scripts/uninstall.ts")).default()
 })
 
 
 program.command('apply').description('Install all instances for which a folder is not there yet.').action(async () => {
-    (await import("../scripts/apply.ts")).default()
+    await (await import("../scripts/apply.ts")).default()
 
 })
 
@@ -75,11 +75,11 @@ program.command('apply').description('Install all instances for which a folder i
 //////////////////////////////////////////////
 
 program.command('start').description('Start all services').action(async () => {
-    console.warn("TODO")
+    await (await import("../scripts/start.ts")).default()
 })
 
 program.command('stop').description('Stop all services').action(async () => {
-    console.warn("TODO")
+    await (await import("../scripts/stop.ts")).default()
 })
 
 

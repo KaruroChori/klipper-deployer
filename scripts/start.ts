@@ -1,10 +1,12 @@
 #!/bin/env bun
+import { $ } from "bun";
+import { get_config, get_env } from "./+utils";
 
 const main = async () => {
+    const config = await get_config();
+    const { start } = await get_env(config)
 
-    //Scroll all elements in the config file and build those entries.
-
-    //If there are folders left out, those must be removed (optional via flag)
+    await start.system()
 }
 
 export default main

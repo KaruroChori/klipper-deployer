@@ -33,5 +33,5 @@ export default main
 import { pathToFileURL } from 'url'
 import { get_config, get_env } from './+utils';
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {
-    main()
+    await main()
 }
