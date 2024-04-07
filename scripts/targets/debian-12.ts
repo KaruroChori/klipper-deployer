@@ -42,7 +42,9 @@ export const install_packages = (config: schema) => {
             console.log("Updating python virtual environment...")
 
             // Create virtualenv if it doesn't already exist
-            await $`[ ! -d ${config.install.base}/klippy_env ] && virtualenv -p python3 ${config.install.base}/klippy_env`
+            if (!existsSync(`${config.install.base}/klippy_env`)) {
+                await $`virtualenv -p python3 ${config.install.base}/klippy_env`
+            }
             //Install / update dependencies
             await $`${config.install.base}/klippy_env/bin/pip install -r ${config.install.base}/repos/klipper/scripts/klippy-requirements.txt`
         },
@@ -58,7 +60,9 @@ export const install_packages = (config: schema) => {
             await $`sudo apt install ${PKGLIST} --yes`
 
             // Create virtualenv if it doesn't already exist
-            await $`[ ! -d ${config.install.base}/moonraker_env ] && virtualenv -p python3 ${config.install.base}/moonraker_env`
+            if (!existsSync(`${config.install.base}/moonraker_env`)) {
+                await $`virtualenv -p python3 ${config.install.base}/moonraker_env`
+            }
             //Install / update dependencies
             await $`${config.install.base}/moonraker_env/bin/pip install -r ${config.install.base}/repos/moonraker/scripts/moonraker-requirements.txt`
             if (config.services.moonraker?.speedsup === true) {
