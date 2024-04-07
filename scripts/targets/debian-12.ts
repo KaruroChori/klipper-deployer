@@ -72,9 +72,9 @@ export const install_packages = (config: schema) => {
         },
         fluidd: async () => {
             console.log("Removing previous instance if present:")
-            await $`sudo service stop ${`${config.install.prefix}-` ?? ''}fluidd`
-            await $`sudo rm ${config.install.systemd}/${`${config.install.prefix}-` ?? ''}fluidd.service`
-            let PKGLIST = "python3";
+            await $`sudo service stop ${`${config.install.prefix}-` ?? ''}fluidd || true`
+            await $`sudo rm ${config.install.systemd}/${`${config.install.prefix}-` ?? ''}fluidd.service  || true`
+            let PKGLIST = ["python3"];
             console.log("Installing Fluidd dependencies:")
             await $`sudo apt install ${PKGLIST} --yes`
             console.log("Generating service files:")
@@ -86,9 +86,9 @@ export const install_packages = (config: schema) => {
         },
         mainsail: async () => {
             console.log("Removing previous instance if present:")
-            await $`sudo service stop ${`${config.install.prefix}-` ?? ''}mainsail`
-            await $`sudo rm ${config.install.systemd}/${`${config.install.prefix}-` ?? ''}mainsail.service`
-            let PKGLIST = "python3";
+            await $`sudo service stop ${`${config.install.prefix}-` ?? ''}mainsail || true`
+            await $`sudo rm ${config.install.systemd}/${`${config.install.prefix}-` ?? ''}mainsail.service || true`
+            let PKGLIST = ["python3"];
             console.log("Installing mainsail dependencies:")
             await $`sudo apt install ${PKGLIST} --yes`
             console.log("Generating service files:")
@@ -118,12 +118,12 @@ export const uninstall_packages = (config: schema) => {
         },
         fluidd: async () => {
             console.log("Removing previous instance if present:")
-            await $`sudo service stop ${`${config.install.prefix}-` ?? ''}fluidd`
+            await $`sudo service stop ${`${config.install.prefix}-` ?? ''}fluidd  || true`
             await $`sudo rm ${config.install.systemd}/${`${config.install.prefix}-` ?? ''}fluidd.service`
         },
         mainsail: async () => {
             console.log("Removing previous instance if present:")
-            await $`sudo service stop ${`${config.install.prefix}-` ?? ''}mainsail`
+            await $`sudo service stop ${`${config.install.prefix}-` ?? ''}mainsail  || true`
             await $`sudo rm ${config.install.systemd}/${`${config.install.prefix}-` ?? ''}mainsail.service`
         }
     }
