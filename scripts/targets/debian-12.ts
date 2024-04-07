@@ -49,10 +49,10 @@ export const install_packages = (config: schema) => {
         moonraker: async () => {
             //TODO: Basically an alternative implementation for ./install-moonraker.sh split across make_intance and here.
 
-            let PKGLIST = ""
-            PKGLIST = `${PKGLIST} python3 python3-virtualenv python3-dev liblmdb-dev`
-            PKGLIST = `${PKGLIST} libopenjp2-7 libsodium-dev zlib1g-dev libjpeg-dev`
-            PKGLIST = `${PKGLIST} packagekit wireless-tools curl`
+            let PKGLIST = []
+            PKGLIST.push('python3', 'python3-virtualenv', 'python3-dev', 'liblmdb-dev')
+            PKGLIST.push('libopenjp2-7', 'libsodium-dev', 'zlib1g-dev', 'libjpeg-dev')
+            PKGLIST.push('packagekit', 'wireless-tools', 'curl')
 
             console.log("Installing Moonraker Dependencies:")
             await $`sudo apt install ${PKGLIST} --yes`
