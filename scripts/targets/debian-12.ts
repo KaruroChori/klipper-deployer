@@ -66,7 +66,7 @@ export const install_packages = (config: schema) => {
             //Install / update dependencies
             await $`${config.install.base}/moonraker_env/bin/pip install -r ${config.install.base}/repos/moonraker/scripts/moonraker-requirements.txt`
             if (config.services.moonraker?.speedsup === true) {
-                await $`${config.install.base}/moonraker_env/bin/pip install -r ${config.install.base}/repos/moonraker/scripts/moonraker-speedsup.txt`
+                await $`${config.install.base}/moonraker_env/bin/pip install -r ${config.install.base}/repos/moonraker/scripts/moonraker-speedups.txt`
             }
 
         },
