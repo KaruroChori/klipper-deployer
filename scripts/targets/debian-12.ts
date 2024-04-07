@@ -21,7 +21,7 @@ export const install_packages = (config: schema) => {
             //kconfig requirements
             PKGLIST = `${PKGLIST} libncurses-dev`
             // hub-ctrl
-            PKGLIST = `${PKGLIST} libusb-dev libusb-1.0`
+            PKGLIST = `${PKGLIST} libusb-dev ` //libusb-1.0`
             // AVR chip installation
             PKGLIST = `${PKGLIST} avrdude`
             if (config.services.klipper?.arch.includes('all') || config.services.klipper?.arch.includes('avr')) {
