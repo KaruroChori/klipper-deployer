@@ -17,23 +17,23 @@ export const install_packages = (config: schema) => {
         },
         klipper: async () => {
             //Packages for python cffi
-            let PKGLIST = "python3 virtualenv python3-dev libffi-dev build-essential";
+            let PKGLIST = ["python3", "virtualenv", "python3-dev", "libffi-dev", "build-essential"];
             //kconfig requirements
-            PKGLIST = `${PKGLIST} libncurses-dev`
+            PKGLIST.push('libncurses-dev')
             // hub-ctrl
-            PKGLIST = `${PKGLIST} libusb-dev ` //libusb-1.0`
+            PKGLIST.push('libusb-dev') // ` //libusb-1.0`
             // AVR chip installation
-            PKGLIST = `${PKGLIST} avrdude`
+            PKGLIST.push('avrdude')
             if (config.services.klipper?.arch.includes('all') || config.services.klipper?.arch.includes('avr')) {
                 // AVR chip building
-                PKGLIST = `${PKGLIST}  gcc-avr binutils-avr avr-libc`
+                PKGLIST.push('gcc-avr', 'binutils-avr', 'avr-libc')
             }
             // ARM chip installation
-            PKGLIST = `${PKGLIST} stm32flash dfu-util`
+            PKGLIST.push('stm32flash', 'dfu-util')
             if (config.services.klipper?.arch.includes('all') || config.services.klipper?.arch.includes('arm32')) {
                 // ARM chip  building
-                PKGLIST = `${PKGLIST} libnewlib-arm-none-eabi`
-                PKGLIST = `${PKGLIST} gcc-arm-none-eabi binutils-arm-none-eabi`
+                PKGLIST.push('libnewlib-arm-none-eabi')
+                PKGLIST.push('gcc-arm-none-eabi', 'binutils-arm-none-eabi')
             }
             // Install desired packages
             console.log("Installing the rest of the packages...")
