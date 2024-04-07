@@ -209,7 +209,21 @@ export const make_instance = (config: schema, name: string) => {
         },
         moonraker: async () => {
             console.log("Generating directories:")
-            //TODO
+
+            await $`mkdir -p ${config.install.base}/instances/${name}/printer_data/config`;
+            await $`mkdir -p ${config.install.base}/instances/${name}/printer_data/logs`;
+            await $`mkdir -p ${config.install.base}/instances/${name}/printer_data/systemd`;
+
+            console.log("Generating moonraker.cfg:")
+
+            await $`echo ${(await import('../../templates/moonraker.cfg')).default(config, name)} > ${config.install.base}/instances/${name}/printer_data/config/moonraker.conf`
+
+            console.log("Generating moonraker.env:")
+
+            await $`echo ${(await import('../../templates/moonraker.env')).default(config, name)} > ${config.install.base}/instances/${name}/printer_data/systemd/moonraker.env`
+
+            await $`sudo groupadd -f moonraker-admin`
+
             const n = `${`${config.install.prefix}-` ?? ''}moonraker-${name}`
             console.log("Generating service files:")
             await $`sudo echo ${(await import('../../templates/moonraker.service')).default(config, name)} > ${config.install.systemd}/${n}.service`
