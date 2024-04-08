@@ -63,8 +63,8 @@ program.command('uninstall').description('Remove venvs for all services and remo
 })
 
 
-program.command('apply').description('Install all instances for which a folder is not there yet.').action(async () => {
-    await (await import("../scripts/apply.ts")).default()
+program.command('apply').description('Install all instances for which a folder is not there yet.').option('remove', 'If true, remove instances no longer in the config file', false).action(async (remove) => {
+    await (await import("../scripts/apply.ts")).default(remove)
 
 })
 

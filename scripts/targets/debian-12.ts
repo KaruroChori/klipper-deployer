@@ -116,7 +116,7 @@ export const uninstall_packages = (config: schema) => {
         },
         klipper: async () => {
             console.log("Removing klipper venv:")
-            await $`rm -rf ${config.install.base}/moonraker_env`
+            await $`rm -rf ${config.install.base}/klippy_env`
 
         },
         moonraker: async () => {
