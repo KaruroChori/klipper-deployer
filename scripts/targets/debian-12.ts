@@ -148,11 +148,16 @@ export const clone = (config: schema) => {
         klipper: async () => {
             console.log('Cloning klipper')
             await $`mkdir -p ${config.install.base}/repos/ && cd ${config.install.base}/repos/ &&  git clone ${config.services.klipper!.repo} --branch ${config.services.klipper!.branch} --depth 1`
+            for (const patch of config.services.klipper?.patches ?? []) {
+                await $`cd ${config.install.base}/repos/ &&  git patch ${import.meta.dir}/../../patches/klipper/${patch}.patch`
+            }
         },
         moonraker: async () => {
             console.log('Cloning moonraker')
             await $`mkdir -p ${config.install.base}/repos/ && cd ${config.install.base}/repos/ &&  git clone ${config.services.moonraker!.repo} --branch ${config.services.moonraker!.branch} --depth 1`
-
+            for (const patch of config.services.moonraker?.patches ?? []) {
+                await $`cd ${config.install.base}/repos/ &&  git patch ${import.meta.dir}/../../patches/moonraker/${patch}.patch`
+            }
         },
         fluidd: async () => {
             console.log('Cloning mainsail')
@@ -169,11 +174,17 @@ export const pull = (config: schema) => {
     return {
         klipper: async () => {
             console.log('Pulling klipper')
-            await $`cd ${config.install.base}/repos/ &&  git pull`
+            await $`cd ${config.install.base}/repos/ && git reset --hard HEAD~1 &&  git pull`
+            for (const patch of config.services.klipper?.patches ?? []) {
+                await $`cd ${config.install.base}/repos/ &&  git patch ${import.meta.dir}/../../patches/klipper/${patch}.patch`
+            }
         },
         moonraker: async () => {
             console.log('Pulling moonraker')
-            await $`cd ${config.install.base}/repos/ &&  git pull`
+            await $`cd ${config.install.base}/repos/ && git reset --hard HEAD~1 &&  git pull`
+            for (const patch of config.services.moonraker?.patches ?? []) {
+                await $`cd ${config.install.base}/repos/ &&  git patch ${import.meta.dir}/../../patches/moonraker/${patch}.patch`
+            }
         }
     }
 }
