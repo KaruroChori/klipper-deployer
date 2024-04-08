@@ -80,7 +80,7 @@ export const install_packages = (config: schema) => {
             console.log("Generating service files:")
 
             const file = `${config.install.systemd}/${config.install.prefix ? `${config.install.prefix}-` : ''}fluidd.service`
-            await $`sudo echo ${(await import('../../templates/fluidd.service')).default(config)} > ${file}`
+            await $`echo ${(await import('../../templates/fluidd.service')).default(config)} | sudo tee ${file}`
 
             await $`sudo systemctl enable ${`${config.install.prefix}-` ?? ''}fluidd.service`
             await $`sudo service start ${`${config.install.prefix}-` ?? ''}fluidd`
@@ -96,7 +96,7 @@ export const install_packages = (config: schema) => {
             console.log("Generating service files:")
 
             const file = `${config.install.systemd}/${config.install.prefix ? `${config.install.prefix}-` : ''}mainsail.service`
-            await $`sudo echo ${(await import('../../templates/mainsail.service')).default(config)} > ${file}`
+            await $`echo ${(await import('../../templates/mainsail.service')).default(config)} | sudo tee ${file}`
 
             await $`sudo systemctl enable ${`${config.install.prefix}-` ?? ''}mainsail.service`
             await $`sudo service start ${`${config.install.prefix}-` ?? ''}mainsail`
@@ -211,7 +211,8 @@ export const make_instance = (config: schema, name: string) => {
 
             console.log("Generating service files:")
             const n = `${`${config.install.prefix}-` ?? ''}klipper-${name}`
-            await $`sudo printf ${(await import('../../templates/klipper.service')).default(config, name)} > ${config.install.systemd}/${n}.service`
+            const file = `${config.install.systemd}/${n}.service`
+            await $`echo ${(await import('../../templates/klipper.service')).default(config, name)} | sudo tee ${file}`
             await $`sudo systemctl enable ${n}.service`
             await $`sudo service start ${n}`
         },
@@ -234,7 +235,8 @@ export const make_instance = (config: schema, name: string) => {
 
             const n = `${`${config.install.prefix}-` ?? ''}moonraker-${name}`
             console.log("Generating service files:")
-            await $`sudo echo ${(await import('../../templates/moonraker.service')).default(config, name)} > ${config.install.systemd}/${n}.service`
+            const file = `${config.install.systemd}/${n}.service`
+            await $`echo ${(await import('../../templates/moonraker.service')).default(config, name)} | sudo tee ${file}`
             await $`sudo systemctl enable ${n}.service`
             await $`sudo service start ${n}`
         }
