@@ -13,4 +13,6 @@
 - [ ] Add proper config files for the quick profiles
 - [ ] Add the documentation as a man page
 - [ ] Add full tutorial
+- [ ] Implement NFS shares
+- [ ] Implement the command line utilities (like adding an instance)
 - [ ] Distribute as a NPM package
