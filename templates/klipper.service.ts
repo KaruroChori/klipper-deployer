@@ -14,6 +14,6 @@ WantedBy=multi-user.target
 Type=simple
 User=${opts.install.user}
 RemainAfterExit=yes
-ExecStart=${opts.install.base}/klippy-env/bin/python ${opts.install.base}/repos/klipper/klippy/klippy.py ${opts.install.base}/instances/${instance}/printer_data/config/printer.cfg -l ${opts.install.base}/instances/${instance}/printer_data/logs/klippy.log -a /tmp/klippy_uds_${`${opts.install.prefix}_` ?? ''}${instance}
+ExecStart=${opts.install.base}/klippy_env/bin/python ${opts.install.base}/repos/klipper/klippy/klippy.py ${opts.install.base}/instances/${instance}/printer_data/config/printer.cfg -l ${opts.install.base}/instances/${instance}/printer_data/logs/klippy.log -a /tmp/klippy_uds_${`${opts.install.prefix}_` ?? ''}${instance}
 Restart=always
 RestartSec=10`

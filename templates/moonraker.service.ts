@@ -16,6 +16,6 @@ User=${opts.install.user}
 SupplementaryGroups=moonraker-admin
 RemainAfterExit=yes
 EnvironmentFile=${opts.install.base}/instances/${instance}/printer_data/systemd/moonraker.env
-ExecStart=${opts.install.base}/instances/${instance}/moonraker-env/bin/python $MOONRAKER_ARGS
+ExecStart=${opts.install.base}/moonraker_env/bin/python $MOONRAKER_ARGS
 Restart=always
 RestartSec=10`

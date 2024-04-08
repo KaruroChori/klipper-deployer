@@ -223,6 +223,7 @@ export const make_instance = (config: schema, name: string) => {
             await $`mkdir -p ${config.install.base}/instances/${name}/printer_data/config/`;
 
             console.log("Generating service files:")
+            await $`echo ${(await import('../../templates/printer.cfg')).default(config, name)} > ${config.install.base}/instances/${name}/printer_data/config/printer.cfg`
 
             await $`echo ${(await import('../../templates/klipper.service')).default(config, name)} | sudo tee ${file}`
             await $`sudo systemctl enable ${n}.service`
