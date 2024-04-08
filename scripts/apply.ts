@@ -32,6 +32,10 @@ const main = async (remove: boolean = false) => {
         console.log(`Adding [${I}]`)
 
         await make_instance(I).system()
+        if (config.services.klipper?.enabled) {
+            await make_instance(I).klipper()
+            console.log('Debug1')
+        }
         if (config.services.moonraker?.enabled) {
             console.log('Debug2')
 
@@ -40,11 +44,6 @@ const main = async (remove: boolean = false) => {
             console.log('Debug13')
 
         }
-        if (config.services.klipper?.enabled) {
-            await make_instance(I).klipper()
-            console.log('Debug1')
-        }
-
     }
 
     if (remove) for (const I of LEFT_A) {
