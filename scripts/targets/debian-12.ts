@@ -160,12 +160,12 @@ export const clone = (config: schema) => {
             }
         },
         fluidd: async () => {
-            console.log('Cloning mainsail')
-            await $`mkdir -p ${config.install.base}/repos/mainsail && cd ${config.install.base}/repos/fluidd &&  wget ${config.services.mainsail!.repo}/releases/download/${config.services.mainsail!.tag}/mainsail.zip && unzip mainsail.zip && rm mainsail.zip`
+            console.log('Cloning fluidd')
+            await $`mkdir -p ${config.install.base}/repos/fluidd && cd ${config.install.base}/repos/fluidd &&  wget ${config.services.fluidd!.repo}/releases/download/${config.services.fluidd!.tag}/fluidd.zip && unzip fluidd.zip && rm fluidd.zip`
         },
         mainsail: async () => {
-            console.log('Cloning fluidd')
-            await $`mkdir -p ${config.install.base}/repos/fluidd && cd ${config.install.base}/repos/mainsail &&  wget ${config.services.fluidd!.repo}/releases/download/${config.services.fluidd!.tag}/fluidd.zip && unzip fluidd.zip && rm fluidd.zip`
+            console.log('Cloning mainsail')
+            await $`mkdir -p ${config.install.base}/repos/mainsail && cd ${config.install.base}/repos/mainsail &&  wget ${config.services.mainsail!.repo}/releases/download/${config.services.mainsail!.tag}/mainsail.zip && unzip mainsail.zip && rm mainsail.zip`
         }
     }
 }
