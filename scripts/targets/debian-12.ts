@@ -230,6 +230,7 @@ export const make_instance = (config: schema, name: string) => {
                 await $`sudo service ${n} start`
             }
             catch (e) { console.error('Something going on here', e) }
+            console.log('Done')
         },
         moonraker: async () => {
             const n = `${config.install.prefix ? `${config.install.prefix}-` : ''}moonraker-${name}`
