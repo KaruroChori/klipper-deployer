@@ -224,9 +224,12 @@ export const make_instance = (config: schema, name: string) => {
 
             console.log("Generating service files:")
 
-            await $`echo ${(await import('../../templates/klipper.service')).default(config, name)} | sudo tee ${file}`
-            await $`sudo systemctl enable ${n}.service`
-            await $`sudo service ${n} start`
+            try {
+                await $`echo ${(await import('../../templates/klipper.service')).default(config, name)} | sudo tee ${file}`
+                await $`sudo systemctl enable ${n}.service`
+                await $`sudo service ${n} start`
+            }
+            catch (e) { console.error('Something going on here', e) }
         },
         moonraker: async () => {
             const n = `${config.install.prefix ? `${config.install.prefix}-` : ''}moonraker-${name}`

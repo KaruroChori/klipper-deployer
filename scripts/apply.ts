@@ -32,19 +32,23 @@ const main = async (remove: boolean = false) => {
         console.log(`Adding [${I}]`)
 
         await make_instance(I).system()
-        if (config.services.klipper?.enabled)
+        if (config.services.klipper?.enabled) {
             await make_instance(I).klipper()
-        if (config.services.moonraker?.enabled)
+        }
+        if (config.services.moonraker?.enabled) {
             await make_instance(I).moonraker()
+        }
     }
 
     if (remove) for (const I of LEFT_A) {
         console.log(`Removing [${I}]`)
 
-        if (config.services.klipper?.enabled)
+        if (config.services.klipper?.enabled) {
             await delete_instance(I).klipper()
-        if (config.services.moonraker?.enabled)
+        }
+        if (config.services.moonraker?.enabled) {
             await delete_instance(I).moonraker()
+        }
         await delete_instance(I).system()
     }
     else {
