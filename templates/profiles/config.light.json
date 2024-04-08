@@ -1,0 +1,33 @@
+{
+  "install": {
+    "systemd": "/etc/systemd/system"
+  },
+  "services": {
+    "klipper": {
+      "enabled": true,
+      "arch": ["runtime"],
+      "repo": "https://github.com/Klipper3d/klipper",
+      "branch": "master",
+      "patches": ["newlib4.3-arm"]
+    },
+    "moonraker": {
+      "enabled": true,
+      "repo": "https://github.com/Arksine/moonraker",
+      "branch": "master",
+      "speedsup": true
+    },
+    "fluidd": {
+      "enabled": true,
+      "repo": "https://github.com/fluidd-core/fluidd",
+      "tag": "v1.29.1",
+      "port": 8000
+    }
+  },
+  "instances": {
+    "0": {
+      "moonraker": {
+        "port": 7125
+      }
+    }
+  }
+}
