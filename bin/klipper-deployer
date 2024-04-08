@@ -23,7 +23,7 @@ program.command('presets').description('List all available presets.').action(asy
 program.command('preset').argument('<name>').description('One enter operation using one of the default presets.').action(async (arg0) => {
     try {
         await $`mkdir -p ./config/`.quiet()
-        await $`cp -p ${import.meta.dir}/../templates/profiles/${arg0}.json ./config/`.quiet()
+        await $`cp -p ${import.meta.dir}/../templates/profiles/${arg0}.json ./config/main.json`.quiet()
         console.log(`Preset copied.`)
     }
     catch (e) {
