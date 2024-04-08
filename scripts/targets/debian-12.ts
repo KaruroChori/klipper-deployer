@@ -235,27 +235,27 @@ export const make_instance = (config: schema, name: string) => {
             const file = `${config.install.systemd}/${n}.service`
 
             console.log("Generating directories:")
-            /*
-                        await $`mkdir -p ${config.install.base}/instances/${name}/printer_data/config`;
-                        await $`mkdir -p ${config.install.base}/instances/${name}/printer_data/logs`;
-                        await $`mkdir -p ${config.install.base}/instances/${name}/printer_data/systemd`;
-            
-                        console.log("Generating moonraker.cfg:")
-            
-                        await $`echo ${(await import('../../templates/moonraker.cfg')).default(config, name)} > ${config.install.base}/instances/${name}/printer_data/config/moonraker.conf`
-            
-                        console.log("Generating moonraker.env:")
-            
-                        await $`echo ${(await import('../../templates/moonraker.env')).default(config, name)} > ${config.install.base}/instances/${name}/printer_data/systemd/moonraker.env`
-            
-                        await $`sudo groupadd -f moonraker-admin`
-            
-                        console.log("Generating service files:")
-            
-                        await $`echo ${(await import('../../templates/moonraker.service')).default(config, name)} | sudo tee ${file}`
-                        await $`sudo systemctl enable ${n}.service`
-                        await $`sudo service ${n} start`
-            */
+
+            await $`mkdir -p ${config.install.base}/instances/${name}/printer_data/config`;
+            await $`mkdir -p ${config.install.base}/instances/${name}/printer_data/logs`;
+            await $`mkdir -p ${config.install.base}/instances/${name}/printer_data/systemd`;
+
+            console.log("Generating moonraker.cfg:")
+
+            await $`echo ${(await import('../../templates/moonraker.cfg')).default(config, name)} > ${config.install.base}/instances/${name}/printer_data/config/moonraker.conf`
+
+            console.log("Generating moonraker.env:")
+
+            await $`echo ${(await import('../../templates/moonraker.env')).default(config, name)} > ${config.install.base}/instances/${name}/printer_data/systemd/moonraker.env`
+
+            await $`sudo groupadd -f moonraker-admin`
+
+            console.log("Generating service files:")
+
+            await $`echo ${(await import('../../templates/moonraker.service')).default(config, name)} | sudo tee ${file}`
+            await $`sudo systemctl enable ${n}.service`
+            await $`sudo service ${n} start`
+
             console.log('Done')
 
         }
