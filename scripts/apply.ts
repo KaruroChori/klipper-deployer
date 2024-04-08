@@ -34,9 +34,15 @@ const main = async (remove: boolean = false) => {
         await make_instance(I).system()
         if (config.services.klipper?.enabled) {
             await make_instance(I).klipper()
+            console.log('Debug1')
         }
         if (config.services.moonraker?.enabled) {
+            console.log('Debug2')
+
             await make_instance(I).moonraker()
+
+            console.log('Debug13')
+
         }
     }
 
