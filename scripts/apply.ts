@@ -17,6 +17,7 @@ const main = async (remove: boolean = false) => {
     const config = await get_config();
     const { make_instance, delete_instance } = await get_env(config)
 
+
     const A = existsSync('./instances') ? readdirSync('./instances/') : []
     const B = Object.keys(config.instances)
 
@@ -29,33 +30,29 @@ const main = async (remove: boolean = false) => {
     }
 
     for (const I of LEFT_B) {
+        const mk_instance = make_instance(I);
         console.log(`Adding [${I}]`)
 
-        await make_instance(I).system()
+        await mk_instance.system()
         if (config.services.klipper?.enabled) {
-            await make_instance(I).klipper()
-            console.log('Debug1')
+            await mk_instance.klipper()
         }
         if (config.services.moonraker?.enabled) {
-            console.log('Debug2')
-
-            await make_instance(I).moonraker()
-
-            console.log('Debug13')
-
+            await mk_instance.moonraker()
         }
     }
 
     if (remove) for (const I of LEFT_A) {
+        const dl_instance = delete_instance(I);
         console.log(`Removing [${I}]`)
 
         if (config.services.klipper?.enabled) {
-            await delete_instance(I).klipper()
+            await dl_instance.klipper()
         }
         if (config.services.moonraker?.enabled) {
-            await delete_instance(I).moonraker()
+            await dl_instance.moonraker()
         }
-        await delete_instance(I).system()
+        await dl_instance.system()
     }
     else {
         for (const I of LEFT_A) {
