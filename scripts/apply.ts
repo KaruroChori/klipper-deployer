@@ -39,7 +39,7 @@ const main = async (remove: boolean = false) => {
         if (config.services.moonraker?.enabled) {
             console.log('Debug2')
 
-            await make_instance(I).moonraker()
+            //await make_instance(I).moonraker()
 
             console.log('Debug13')
 
