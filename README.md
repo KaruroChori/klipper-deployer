@@ -85,6 +85,11 @@ klipper-deployer start      #To start all global and instance-based services.
 
 TBW
 
+### Patches
+
+There is a [collection](./docs/patches.md) of curated patches for both klipper and moonraker.  
+You can specify which one you want as an array in the property `patches` while configuring the two services.
+
 ### NFS share
 
 TBW

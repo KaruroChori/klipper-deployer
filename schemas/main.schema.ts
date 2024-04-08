@@ -1,4 +1,8 @@
 import { Static, Type as t } from "@sinclair/typebox"
+import { readdirSync, existsSync } from 'node:fs'
+
+const klipper_patches = existsSync(`${import.meta.dir}/../patches/klipper/`) ? Array.from(readdirSync(`${import.meta.dir}/../patches/klipper/`)).map(x => x.substring(0, x.length - `.patch`.length)) : []
+const moonraker_patches = existsSync(`${import.meta.dir}/../patches/moonraker/`) ? Array.from(readdirSync(`${import.meta.dir}/../patches/moonraker/`)).map(x => x.substring(0, x.length - `.patch`.length)) : []
 
 const w = t.Object({
     "install": t.Object({
@@ -25,14 +29,16 @@ const w = t.Object({
             ), { default: ["runtime"] }),
             repo: t.String({ default: 'https://github.com/Klipper3d/klipper' }),
             branch: t.String({ default: 'master', description: 'The branch to use to copy from' }),
-            commit: t.Optional(t.String({ description: 'Alternative to branch, select the exact commit' }))
+            commit: t.Optional(t.String({ description: 'Alternative to branch, select the exact commit' })),
+            patches: t.Optional(t.Array(t.Union(klipper_patches.map(x => t.Literal(x))), { description: 'List of patches to apply to the cloned repo' }))
         }, { default: {}, additionalProperties: false })),
         "moonraker": t.Optional(t.Object({
             enabled: t.Boolean({ default: false }),
             repo: t.String({ default: 'https://github.com/Arksine/moonraker' }),
             branch: t.String({ default: 'master', description: 'The branch to use to copy from' }),
             commit: t.Optional(t.String({ description: 'Alternative to branch, select the exact commit' })),
-            speedsup: t.Optional(t.Boolean({ default: true, description: 'Install additional packages' }))
+            speedsup: t.Optional(t.Boolean({ default: true, description: 'Install additional packages' })),
+            patches: t.Optional(t.Array(t.Union(klipper_patches.map(x => t.Literal(x))), { description: 'List of patches to apply to the cloned repo' }))
         }, { default: {}, additionalProperties: false })),
         "fluidd": t.Optional(t.Object({
             enabled: t.Boolean({ default: false }),

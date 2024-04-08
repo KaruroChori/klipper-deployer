@@ -10,6 +10,22 @@
 
 ## Path to beta 1
 
+### Testing
+
+Basic checks to validate code is working ok.
+
+- [x] init
+- [x] commit
+- [x] clone
+- [x] pull
+- [x] install
+- [x] uninstall
+- [x] apply
+- [ ] start
+- [ ] stop
+
+### Features
+
 - [ ] Add proper config files for the quick profiles
 - [ ] Add the documentation as a man page
 - [ ] Add full tutorial
