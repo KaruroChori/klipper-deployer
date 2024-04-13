@@ -51,11 +51,17 @@ enable_auto_refresh: True
 [announcements]
 subscriptions:
   fluidd
-${opts.services.fluidd?.enabled ?
-        `[update_manager fluidd]
+${(opts.services.fluidd?.enabled && opts.services.fluidd?.updatable) ?
+    `[update_manager fluidd]
 type: web
 repo: ${opts.services.fluidd?.repo}
-path: ${opts.install.base}/repos
+path: ${opts.install.base}/repos/fluidd
+`: ''}
+${(opts.services.mainsail?.enabled && opts.services.mainsail?.updatable) ?
+    `[update_manager mainsail]
+type: web
+repo: ${opts.services.mainsail?.repo}
+path: ${opts.install.base}/repos/mainsail
 `: ''}
 [machine]
 provider: systemd_dbus
