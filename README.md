@@ -46,12 +46,8 @@ In general, support for more systems will be added over time.
 There are few ways to install this tool on your system. The easiest is to do it via bun.
 
 ```
-bun install --global git://github.com/KaruroChori/klipper-deployer.git#v1.2.0-beta
+bun install --global git://github.com/KaruroChori/klipper-deployer.git#beta-1.2
 ```
-
-> [!NOTE]
-> This will not work right now.
-> The package as not been released yet, so either you install it from the github repository, or you clone and use it from there.
 
 After that, you should be able to use `klipper-deployer` where you want.  
 Go to the directory you want to use to host klipper & everything related.
