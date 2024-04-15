@@ -1,10 +1,22 @@
 {
   "name": "klipper-manager",
   "main": "./bin/klipper-deployer",
-  "version": "0.1",
+  "version": "1.2.0",
   "license": "UNLICENSED",
   "private": true,
   "type": "module",
+  "preferGlobal": true,
+  "engines": {
+    "bun": ">=1.1.0"
+  },
+  "author": {
+    "name": "KaruroChori",
+    "url": "https://github.com/KaruroChori"
+  },
+  "homepage": "https://github.com/KaruroChori/klipper-deployer",
+  "bin": {
+    "klipper-deployer": "./bin/klipper-deployer"
+  },
   "packageManager": "bun@1.1.0",
   "scripts": {
     "gen-schema": "./scripts/gen-schemas.ts"
