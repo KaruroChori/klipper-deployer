@@ -1,5 +1,5 @@
 > [!CAUTION]
-> This software is not in beta, but it is still a work in progress.  
+> This software is now in beta, but it is still a work in progress.  
 > Most of the documented features are now working, yet you should expect the cli interface and the configuration schema to be broken with new releases.
 
 # What is this?
