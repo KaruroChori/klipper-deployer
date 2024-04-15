@@ -1,11 +1,11 @@
 > [!CAUTION]
-> This software is not in beta, but it is still a work in progress.  
+> This software is now in beta, but it is still a work in progress.  
 > Most of the documented features are now working, yet you should expect the cli interface and the configuration schema to be broken with new releases.
 
 # What is this?
 
 A command line tool which allows to configure multi-printer klipper hosts within the same system. You provide a configuration file (or use one of those distributed along this tool) and _klipper deployer_ does the rest.  
-It is not just klipper alone! You can also deploy moonraker, fluidd and mainsail. It is also possible to apply patches to klipper and moonraker as part of the build process.
+It is not just [klipper](https://www.klipper3d.org/) alone! You can also deploy [moonraker](https://moonraker.readthedocs.io/en/latest/), [fluidd](https://docs.fluidd.xyz/) and [mainsail](https://docs.mainsail.xyz/). It is also possible to apply patches to klipper and moonraker as part of the build process.
 
 This tool is written in typescript, and should be fully portable between different architectures.
 
@@ -36,8 +36,8 @@ Calling it from your shell will display all the options available, but please re
 Before using it, you have to make sure your system fulfills some requirements:
 
 - [ ] Your system should be Debian 12. Other derived systems might work as well as long as packet names are the same.
-- [ ] The user you are running it from must be in your sudoers file.
-- [ ] Install [bun](https://github.com/oven-sh/bun) on the target machine (on linux `curl -fsSL https://bun.sh/install | bash`). This script is written in typescript to keep my sanity.
+- [ ] The user you are running it from must be in your [sudoers file](https://askubuntu.com/questions/7477/how-can-i-add-a-user-as-a-new-sudoer-using-the-command-line).
+- [ ] Install [bun](https://github.com/oven-sh/bun) on the target machine (on linux `curl -fsSL https://bun.sh/install | bash` if you are not worried of piping bash). This script is written in typescript to keep my sanity.
 
 In general, support for more systems will be added over time.
 
