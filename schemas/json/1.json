@@ -1,0 +1,293 @@
+{
+  "default": {},
+  "additionalProperties": false,
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "default": "https://raw.githubusercontent.com/KaruroChori/klipper-deployer/master/schemas/json/1.json",
+      "description": "Optional schema to simplify the process of writing your config file in editors supporting this feature",
+      "type": "string"
+    },
+    "version": {
+      "default": 1,
+      "description": "The schema version. When incompatible schemas are released, this number is going to be incremented",
+      "type": "integer"
+    },
+    "install": {
+      "default": {},
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "base": {
+          "default": "/archive/shared/projects/printer-scripts",
+          "type": "string"
+        },
+        "nfs": {
+          "description": "If set, the gcode folder will include a remote subdir which is mounted to a remote location",
+          "type": "string"
+        },
+        "user": {
+          "default": "migration",
+          "description": "The user to use to run those services",
+          "type": "string"
+        },
+        "systemd": {
+          "default": "/etc/systemd/system",
+          "description": "Folder for the system deamon",
+          "type": "string"
+        },
+        "prefix": {
+          "description": "Prefix for this configuration, only needed if you have multiple on the same system.",
+          "type": "string"
+        },
+        "toolchains": {
+          "type": "object",
+          "properties": {
+            "avr": {
+              "description": "Path for an external avr toolchain",
+              "type": "string"
+            },
+            "arm32": {
+              "description": "Path for an external arm32 toolchain",
+              "type": "string"
+            }
+          }
+        }
+      },
+      "required": [
+        "base",
+        "user",
+        "systemd"
+      ]
+    },
+    "services": {
+      "default": {},
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "klipper": {
+          "default": {},
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "default": true,
+              "type": "boolean"
+            },
+            "arch": {
+              "default": [
+                "runtime"
+              ],
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "description": "Only the dependencies needed to have the runtime working are installed",
+                    "const": "runtime",
+                    "type": "string"
+                  },
+                  {
+                    "description": "All dependencies are installed, usually needed if you want to build on the same system",
+                    "const": "all",
+                    "type": "string"
+                  },
+                  {
+                    "description": "AVR processors support",
+                    "const": "avr",
+                    "type": "string"
+                  },
+                  {
+                    "description": "ARM32 processors support",
+                    "const": "arm32",
+                    "type": "string"
+                  }
+                ]
+              }
+            },
+            "repo": {
+              "default": "https://github.com/Klipper3d/klipper",
+              "type": "string"
+            },
+            "branch": {
+              "default": "master",
+              "description": "The branch to use to copy from",
+              "type": "string"
+            },
+            "commit": {
+              "description": "Alternative to branch, select the exact commit",
+              "type": "string"
+            },
+            "patches": {
+              "description": "List of patches to apply to the cloned repo",
+              "type": "array",
+              "items": {
+                "const": "newlib4.3-arm",
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "enabled",
+            "arch",
+            "repo",
+            "branch"
+          ]
+        },
+        "moonraker": {
+          "default": {},
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "default": false,
+              "type": "boolean"
+            },
+            "repo": {
+              "default": "https://github.com/Arksine/moonraker",
+              "type": "string"
+            },
+            "branch": {
+              "default": "master",
+              "description": "The branch to use to copy from",
+              "type": "string"
+            },
+            "commit": {
+              "description": "Alternative to branch, select the exact commit",
+              "type": "string"
+            },
+            "speedsup": {
+              "default": true,
+              "description": "Install additional packages",
+              "type": "boolean"
+            },
+            "patches": {
+              "description": "List of patches to apply to the cloned repo",
+              "type": "array",
+              "items": {
+                "const": "newlib4.3-arm",
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "enabled",
+            "repo",
+            "branch"
+          ]
+        },
+        "fluidd": {
+          "default": {},
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "default": false,
+              "type": "boolean"
+            },
+            "updatable": {
+              "default": true,
+              "description": "Updatable via moonraker",
+              "type": "boolean"
+            },
+            "repo": {
+              "default": "https://github.com/fluidd-core/fluidd",
+              "type": "string"
+            },
+            "tag": {
+              "default": "v1.29.1",
+              "type": "string"
+            },
+            "port": {
+              "default": 8000,
+              "type": "number"
+            }
+          },
+          "required": [
+            "enabled",
+            "updatable",
+            "repo",
+            "tag",
+            "port"
+          ]
+        },
+        "mainsail": {
+          "default": {},
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "default": false,
+              "type": "boolean"
+            },
+            "updatable": {
+              "default": true,
+              "description": "Updatable via moonraker",
+              "type": "boolean"
+            },
+            "repo": {
+              "default": "https://github.com/mainsail-crew/mainsail",
+              "type": "string"
+            },
+            "tag": {
+              "default": "v2.10.0",
+              "type": "string"
+            },
+            "port": {
+              "default": 8000,
+              "type": "number"
+            }
+          },
+          "required": [
+            "enabled",
+            "updatable",
+            "repo",
+            "tag",
+            "port"
+          ]
+        }
+      }
+    },
+    "instances": {
+      "default": {
+        "0": {
+          "moonraker": {
+            "port": 7125
+          }
+        }
+      },
+      "type": "object",
+      "patternProperties": {
+        "^(.*)$": {
+          "type": "object",
+          "properties": {
+            "moonraker": {
+              "additionalProperties": false,
+              "type": "object",
+              "properties": {
+                "port": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "port"
+              ]
+            },
+            "nfs": {
+              "description": "If set, the gcode folder will include an instance-specific remote subdir mounted from a remote location",
+              "type": "string"
+            }
+          },
+          "required": [
+            "moonraker"
+          ]
+        }
+      }
+    }
+  },
+  "required": [
+    "version",
+    "install",
+    "services",
+    "instances"
+  ]
+}

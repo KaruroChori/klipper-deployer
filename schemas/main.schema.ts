@@ -4,7 +4,16 @@ import { readdirSync, existsSync } from 'node:fs'
 const klipper_patches = existsSync(`${import.meta.dir}/../patches/klipper/`) ? Array.from(readdirSync(`${import.meta.dir}/../patches/klipper/`)).map(x => x.substring(0, x.length - `.patch`.length)) : []
 const moonraker_patches = existsSync(`${import.meta.dir}/../patches/moonraker/`) ? Array.from(readdirSync(`${import.meta.dir}/../patches/moonraker/`)).map(x => x.substring(0, x.length - `.patch`.length)) : []
 
+//Upgrade this when there are breaking changes
+export const SCHEMA_VERSION = 1
+
 const w = t.Object({
+    "$schema": t.Optional(t.String({
+        default: `https://raw.githubusercontent.com/KaruroChori/klipper-deployer/master/schemas/json/${SCHEMA_VERSION}.json`,
+        description: "Optional schema to simplify the process of writing your config file in editors supporting this feature"
+    }
+    )),
+    "version": t.Integer({ default: SCHEMA_VERSION, description: 'The schema version. When incompatible schemas are released, this number is going to be incremented' }),
     "install": t.Object({
         base: t.String({ default: `${process.env.PWD}` }),
         "nfs": t.Optional(t.String({ description: "If set, the gcode folder will include a remote subdir which is mounted to a remote location" })),

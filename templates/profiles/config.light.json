@@ -1,4 +1,6 @@
 {
+  "$schema": "https://raw.githubusercontent.com/KaruroChori/klipper-deployer/master/schemas/json/1.json",
+  "version": 1,
   "install": {
     "systemd": "/etc/systemd/system"
   },

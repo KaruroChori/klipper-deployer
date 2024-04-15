@@ -1,17 +1,30 @@
 > [!CAUTION]
-> All this is very much work in progress; not all features are working, even when documented.
+> This software is not in beta, but it is still a work in progress.  
+> Most of the documented features are now working, yet you should expect the cli interface and the configuration schema to be broken with new releases.
+
+# What is this?
+
+A command line tool which allows to configure multi-printer klipper hosts within the same system. You provide a configuration file (or use one of those distributed along this tool) and _klipper deployer_ does the rest.  
+It is not just klipper alone! You can also deploy moonraker, fluidd and mainsail. It is also possible to apply patches to klipper and moonraker as part of the build process.
+
+This tool is written in typescript, and should be fully portable between different architectures.
+
+## But why?
 
 I recently got a [wyse 3040](https://www.dell.com/support/manuals/de-de/wyse-3040-thin-client/3040_ug/system) to serve as a node on my network, and to handle multiple printers/cnc stuff.  
 It is an atom-based thin-client, roughly the size of a raspberry pi; so, no surprise, it only comes with 2GB of RAM and 8GB of flash storage.  
-Hence, docker-based solutions like [portable-klipper](https://github.com/KaruroChori/portable-klipper) are not really feasible.  
-On paper [kiauh](https://github.com/dw-0/kiauh) offers a more lightweight approach, but it does not work for several reasons:
+Using one for each printer would just be very wasteful, but due to its limited specs, a docker-based solution like [portable-klipper](https://github.com/KaruroChori/portable-klipper) is not really feasible.
 
-- There is no good way to add multiple instances after the initial setup.
-- The base repositories for klipper and moonraker are fully cloned, leading to a significant waste of time and storage during the initial setup.
-- By default, it installs the same dependencies specified on the original installation scripts, but there is no point in having all those toolchains if at no point we are expecting to compile the firmware on the node itself.
+## Don't we have KIAUH already?
+
+On paper [kiauh](https://github.com/dw-0/kiauh) offers a more lightweight approach compared to a dockerized solution, but it would not work for several reasons:
+
+- There is no easy way to add multiple instances after the initial setup.
+- The base repositories for klipper and moonraker are fully cloned, leading to a significant waste of time and storage during the initial setup. Storage I just don't have on a Wyse 3040.
+- By default, it installs the same dependencies as they are specified on the original installation scripts. Still, there is no point in having all those toolchains if we only need to compile firmware for some architectures, or if that is offloaded to a different and more powerful machine.
 
 For these reasons, I have been working on my own scripts to simplify the deployment process of klipper & friends on hardware with low-end specs.  
-A nice extra over a solution like _kiauh_ is how much more easily it can be integrated in automated processes since it is all based on configuration files and few command lines at best.
+A nice extra over a solution like _kiauh_ is how much more easily it can be integrated in automated processes, since it is all based on configuration files and few commands at best.
 
 # How to use it
 

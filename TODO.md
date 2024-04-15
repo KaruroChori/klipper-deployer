@@ -21,14 +21,15 @@ Basic checks to validate code is working ok.
 - [x] install
 - [x] uninstall
 - [x] apply
-- [ ] start
-- [ ] stop
+- [x] start
+- [x] stop
 
 ### Features
 
-- [ ] Add proper config files for the quick profiles
+- [x] Add proper config files for the quick profiles
 - [ ] Add the documentation as a man page
 - [ ] Add full tutorial
 - [ ] Implement NFS shares
 - [ ] Implement the command line utilities (like adding an instance)
 - [ ] Distribute as a NPM package
+- [ ] Add schemas hosted online to validate json config files while being written.

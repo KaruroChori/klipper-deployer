@@ -6,7 +6,9 @@
   "private": true,
   "type": "module",
   "packageManager": "bun@1.1.0",
-  "scripts": {},
+  "scripts": {
+    "gen-schema": "./scripts/gen-schemas.ts"
+  },
   "dependencies": {
     "@sinclair/typebox": "^0.32.20",
     "chalk": "^5.3.0",

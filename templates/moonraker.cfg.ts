@@ -27,11 +27,12 @@ gcode_store_size: 1000
 force_logins: false
 
 cors_domains:
-  *.local
   *.lan
+  *.local
   *://localhost
+  *://localhost:*
+  *://my.mainsail.xyz
   *://app.fluidd.xyz
-  *
 
 trusted_clients:
   10.0.0.0/8
