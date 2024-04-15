@@ -1,6 +1,6 @@
 
 import { Value } from "@sinclair/typebox/value"
-import { schema } from "../schemas/main.schema.ts"
+import { SCHEMA_VERSION, schema } from "../schemas/main.schema.ts"
 import os from 'node:os'
 
 export async function get_config() {
@@ -13,13 +13,16 @@ export async function get_config() {
         process.exit(1)
     }
 
-    const t = Value.Default(schema, config)
+    Value.Default(schema, config)
     if (Value.Errors.length != 0) {
         console.error(`Errors in the config file!`)
         console.error(...Value.Errors(schema, config))
-        process.exit(1)
+        process.exit(2)
     }
-
+    if (config.version != SCHEMA_VERSION) {
+        console.error(`The selected configuration is incompatible with the current schema. If possible migrate it, or manually fix it before progressing.`)
+        process.exit(3)
+    }
     return config
 }
 
@@ -27,7 +30,7 @@ export async function get_config() {
 export async function get_env(config: schema) {
     if (os.platform() !== 'linux') {
         console.error('This utility can only be run on linux')
-        process.exit(1)
+        process.exit(4)
     }
 
 
