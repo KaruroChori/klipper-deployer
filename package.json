@@ -19,7 +19,8 @@
   },
   "packageManager": "bun@1.1.0",
   "scripts": {
-    "gen-schema": "./scripts/gen-schemas.ts"
+    "gen-schema": "./dev-utils/gen-schemas.ts",
+    "update-pkgs": "./dev-utils/update-latest.ts"
   },
   "dependencies": {
     "@sinclair/typebox": "^0.32.20",

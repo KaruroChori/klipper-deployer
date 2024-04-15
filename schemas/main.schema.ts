@@ -5,7 +5,7 @@ const klipper_patches = existsSync(`${import.meta.dir}/../patches/klipper/`) ? A
 const moonraker_patches = existsSync(`${import.meta.dir}/../patches/moonraker/`) ? Array.from(readdirSync(`${import.meta.dir}/../patches/moonraker/`)).map(x => x.substring(0, x.length - `.patch`.length)) : []
 
 //Upgrade this when there are breaking changes
-export const SCHEMA_VERSION = 1
+export const SCHEMA_VERSION = process.env.SCHEMA_VERSION ?? 0
 
 const w = t.Object({
     "$schema": t.Optional(t.String({
@@ -53,14 +53,14 @@ const w = t.Object({
             enabled: t.Boolean({ default: false }),
             updatable: t.Boolean({ default: true, description: 'Updatable via moonraker' }),
             repo: t.String({ default: 'https://github.com/fluidd-core/fluidd' }),
-            tag: t.String({ default: 'v1.29.1' }),
+            tag: t.String({ default: process.env.FLUIDD_TAG }),
             port: t.Number({ default: 8000 })
         }, { default: {}, additionalProperties: false })),
         "mainsail": t.Optional(t.Object({
             enabled: t.Boolean({ default: false }),
             updatable: t.Boolean({ default: true, description: 'Updatable via moonraker' }),
             repo: t.String({ default: 'https://github.com/mainsail-crew/mainsail' }),
-            tag: t.String({ default: 'v2.10.0' }),
+            tag: t.String({ default: process.env.MAINSAIL_TAG }),
             port: t.Number({ default: 8000 })
         }, { default: {}, additionalProperties: false })),
     }, { default: {}, additionalProperties: false })

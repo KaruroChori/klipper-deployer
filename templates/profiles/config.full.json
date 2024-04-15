@@ -21,7 +21,6 @@
     "fluidd": {
       "enabled": true,
       "repo": "https://github.com/fluidd-core/fluidd",
-      "tag": "v1.29.1",
       "port": 8000,
       "updatable": true
     }
