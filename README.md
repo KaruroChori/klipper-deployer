@@ -36,8 +36,8 @@ Calling it from your shell will display all the options available, but please re
 Before using it, you have to make sure your system fulfills some requirements:
 
 - [ ] Your system should be Debian 12. Other derived systems might work as well as long as packet names are the same.
-- [ ] The user you are running it from must be in your sudoers file.
-- [ ] Install [bun](https://github.com/oven-sh/bun) on the target machine (on linux `curl -fsSL https://bun.sh/install | bash`). This script is written in typescript to keep my sanity.
+- [ ] The user you are running it from must be in your [sudoers file](https://askubuntu.com/questions/7477/how-can-i-add-a-user-as-a-new-sudoer-using-the-command-line).
+- [ ] Install [bun](https://github.com/oven-sh/bun) on the target machine (on linux `curl -fsSL https://bun.sh/install | bash` if you are not worried of piping bash). This script is written in typescript to keep my sanity.
 
 In general, support for more systems will be added over time.
 
