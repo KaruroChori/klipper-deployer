@@ -1,5 +1,5 @@
 {
-  "name": "klipper-manager",
+  "name": "klipper-deployer",
   "main": "./bin/klipper-deployer",
   "version": "1.2.0",
   "license": "UNLICENSED",
