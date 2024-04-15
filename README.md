@@ -46,7 +46,7 @@ In general, support for more systems will be added over time.
 There are few ways to install this tool on your system. The easiest is to do it via bun.
 
 ```
-bun install --global klipper-deployer
+bun install --global git://github.com/KaruroChori/klipper-deployer.git#v1.2.0-beta
 ```
 
 > [!NOTE]
