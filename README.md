@@ -4,7 +4,7 @@
 
 # What is this?
 
-A command line tool which allows to configure multi-printer klipper hosts within the same system. You provide a configuration file (or use one of those distributed along this tool) and _klipper deployer_ does the rest.  
+A command line tool which allows configuring multi-printer klipper hosts within the same system. You provide a configuration file (or use one of those distributed along this tool) and _klipper deployer_ does the rest.  
 It is not just [klipper](https://www.klipper3d.org/) alone! You can also deploy [moonraker](https://moonraker.readthedocs.io/en/latest/), [fluidd](https://docs.fluidd.xyz/) and [mainsail](https://docs.mainsail.xyz/). It is also possible to apply patches to klipper and moonraker as part of the build process.
 
 This tool is written in typescript, and should be fully portable between different architectures.

@@ -31,5 +31,5 @@ Basic checks to validate code is working ok.
 - [ ] Add full tutorial
 - [ ] Implement NFS shares
 - [ ] Implement the command line utilities (like adding an instance)
-- [ ] Distribute as a NPM package
-- [ ] Add schemas hosted online to validate json config files while being written.
+- [ ] ~~Distribute as a NPM package~~ not happening
+- [x] Add schemas hosted online to validate json config files while being written.
