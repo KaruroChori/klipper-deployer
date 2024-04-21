@@ -57,9 +57,11 @@ You now have two options: either you use one of the quick presets, or you perfor
 ### Quick preset
 
 Typing `klipper-deployer presets` will give you a list of presets available.  
-Select the one you want, and type `klipper-deployer preset name` to have everything automatically installed and running.  
+Select the one you want, and type `klipper-deployer preset name` to copy it as your config file.  
 Check the [documentation]() too see which presets are shipped with your version of _klipper-deployer_.
 
+You can now type `klipper-deployer all` and have everything automatically installed and running (hopefully).  
+This command is also available for fully custom configuration files, like shown in the next section.  
 You should still check the supported commands in order to further apply changes to your current configuration.
 
 ### Custom config

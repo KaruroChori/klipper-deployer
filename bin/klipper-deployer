@@ -31,6 +31,15 @@ program.command('preset').argument('<name>').description('One enter operation us
     }
 })
 
+program.command('all').description('Run commit/clone/install/apply/start all at once').option('remove', 'If true, remove instances no longer in the config file in the apply step', false).action(async (remove) => {
+    await (await import("../scripts/commit.ts")).default()
+    await (await import("../scripts/clone.ts")).default()
+    await (await import("../scripts/install.ts")).default()
+    await (await import("../scripts/apply.ts")).default(remove)
+    await (await import("../scripts/start.ts")).default()
+})
+
+
 //////////////////////////////////////////////
 // Normal workflow
 //////////////////////////////////////////////
