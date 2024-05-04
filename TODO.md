@@ -33,3 +33,9 @@ Basic checks to validate code is working ok.
 - [ ] Implement the command line utilities (like adding an instance)
 - [ ] ~~Distribute as a NPM package~~ not happening
 - [x] Add schemas hosted online to validate json config files while being written.
+
+## Path to beta 2 
+
+- [ ] Integrate installation of https://github.com/Frix-x/klippain
+- [ ] Integrate installation of https://github.com/andrewmcgr/klipper_tmc_autotune
+- [ ] Integrate installation of https://github.com/MRX8024/chopper-resonance-tuner
