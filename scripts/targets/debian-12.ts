@@ -147,14 +147,14 @@ export const clone = (config: schema) => {
     return {
         klipper: async () => {
             console.log('Cloning klipper')
-            await $`mkdir -p ${config.install.base}/repos/ && cd ${config.install.base}/repos/ &&  git clone ${config.services.klipper!.repo} --branch ${config.services.klipper!.branch} --depth 1`
+            await $`mkdir -p ${config.install.base}/repos/ && cd ${config.install.base}/repos/ &&  git clone ${config.services.klipper!.repo} --branch ${config.services.klipper!.branch} --depth 1 klipper`
             for (const patch of config.services.klipper?.patches ?? []) {
                 await $`cd ${config.install.base}/repos/klipper &&  git apply ${import.meta.dir}/../../patches/klipper/${patch}.patch`
             }
         },
         moonraker: async () => {
             console.log('Cloning moonraker')
-            await $`mkdir -p ${config.install.base}/repos/ && cd ${config.install.base}/repos/ &&  git clone ${config.services.moonraker!.repo} --branch ${config.services.moonraker!.branch} --depth 1`
+            await $`mkdir -p ${config.install.base}/repos/ && cd ${config.install.base}/repos/ &&  git clone ${config.services.moonraker!.repo} --branch ${config.services.moonraker!.branch} --depth 1 moonraker`
             for (const patch of config.services.moonraker?.patches ?? []) {
                 await $`cd ${config.install.base}/repos/moonraker &&  git apply ${import.meta.dir}/../../patches/moonraker/${patch}.patch`
             }

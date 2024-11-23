@@ -20,7 +20,7 @@ export async function get_config() {
         process.exit(2)
     }
     if (config.version != SCHEMA_VERSION) {
-        console.error(`The selected configuration is incompatible with the current schema. If possible migrate it, or manually fix it before progressing.`)
+        console.error(`The selected configuration ${config.version} is incompatible with the current schema version ${SCHEMA_VERSION}. If possible migrate it, or manually fix it before progressing.`)
         process.exit(3)
     }
     return config
