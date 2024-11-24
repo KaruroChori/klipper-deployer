@@ -58,11 +58,54 @@ You now have two options: either you use one of the quick presets, or you perfor
 
 Typing `klipper-deployer presets` will give you a list of presets available.  
 Select the one you want, and type `klipper-deployer preset name` to copy it as your config file.  
-Check the [documentation]() too see which presets are shipped with your version of _klipper-deployer_.
+Check the [documentation]() too see which presets are shipped with your version of _klipper-deployer_.  
+Please, notice that you might still have to add some of the missing information in configuration files automatically generated.
 
 You can now type `klipper-deployer all` and have everything automatically installed and running (hopefully).  
 This command is also available for fully custom configuration files, like shown in the next section.  
 You should still check the supported commands in order to further apply changes to your current configuration.
+
+Here is the example of a typical configuration file:
+```json
+{
+  "$schema": "https://raw.githubusercontent.com/KaruroChori/klipper-deployer/master/schemas/json/1.json",
+  "version": 0,
+  "install": {
+    "systemd": "/etc/systemd/system",
+    "user": "youruser",
+    "base": "/home/youruser/printers"
+  },
+  "services": {
+    "klipper": {
+      "enabled": true,
+      "arch": ["runtime"],
+      "repo": "https://github.com/DangerKlippers/danger-klipper",
+      "branch": "master",
+      "patches": []
+    },
+    "moonraker": {
+      "enabled": true,
+      "repo": "https://github.com/Arksine/moonraker",
+      "branch": "master",
+      "speedsup": true
+    },
+    "fluidd": {
+      "enabled": true,
+      "repo": "https://github.com/fluidd-core/fluidd",
+      "port": 8000,
+      "updatable": true,
+      "tag": "v1.30.6"
+    }
+  },
+  "instances": {
+    "0": {
+      "moonraker": {
+        "port": 7125
+      }
+    }
+  }
+}
+```
 
 ### Custom config
 
